@@ -1,0 +1,52 @@
+import { Review } from '../types';
+
+export const REVIEWS: Review[] = [
+  {
+    id: 'rev-1',
+    name: 'Khairul Aming Fans Club',
+    handle: '@foodie_kl_review',
+    location: 'Kuala Lumpur',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    date: 'Semalam',
+    comment: 'Sumpah sedap gila! Kulit luar dia garing berbunyi "krup krap" bila gigit tapi dalam isi ayam juicy meleleh minyak rempah dia. Sos Cheese Lava dia memang pekat padu!',
+    favoriteItem: 'Hemzal Cheese Lava & Waffle Fries',
+    verified: true,
+  },
+  {
+    id: 'rev-2',
+    name: 'Farhan Nazri',
+    handle: '@farhannazri_vlog',
+    location: 'Ampang, Selangor',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    date: '3 hari lepas',
+    comment: 'Peminat pedas WAJIB cuba Korean Habanero. Level pedas dia bukan biasa-biasa, berpeluh dahi tapi nak makan lagi sebab rasa manis beraroma bijan dia cukup seimbang.',
+    favoriteItem: 'Korean Fiery Habanero',
+    verified: true,
+  },
+  {
+    id: 'rev-3',
+    name: 'Siti Nur Aisyah',
+    handle: '@aisyah_eats',
+    location: 'Seremban Gateway',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    date: '1 minggu lepas',
+    comment: 'Family Bucket 9-pcs berbaloi sangat makan dengan family. Portion ayam dia besar gedabak! Anak-anak suka Original, mak ayah layan Cheese & BBQ.',
+    favoriteItem: 'Family Mega Bucket 9-Pcs',
+    verified: true,
+  },
+  {
+    id: 'rev-4',
+    name: 'Chef Danial Ridzuan',
+    handle: '@chefdanial_my',
+    location: 'Shah Alam',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80',
+    rating: 5,
+    date: '2 minggu lepas',
+    comment: 'Sebagai seorang chef, saya boleh rasa teknik perapan 24 jam Chef Helmi ini sangat teliti. Rempah meresap sampai ke tulang tanpa rasa kering langsung.',
+    favoriteItem: 'Hemzal Original Gold',
+    verified: true,
+  }
+];

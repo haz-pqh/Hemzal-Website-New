@@ -1,0 +1,6 @@
+{
+  "name": "Hemzal Crispy Chicken",
+  "description": "Premium Malaysian gourmet fried chicken crafted by Chef Mohammad Helmi with 5-star hotel recipe, secret double-dredged spice crunch, and interactive ordering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
