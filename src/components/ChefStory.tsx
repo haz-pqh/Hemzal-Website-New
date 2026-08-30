@@ -158,6 +158,11 @@ export const ChefStory: React.FC = () => {
                     <span>Dijamin 100% Halal dan suci oleh pembekal tempatan bertauliah.</span>
                   </div>
                 </div>
+                
+                {/* Interactive Crunch Tryout */}
+                <div className="pt-2">
+                  &nbsp;
+                </div>
               </div>
             </div>
           </div>
