@@ -77,7 +77,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="hubungi" className="py-20 bg-[#09090c]/80 backdrop-blur-sm relative overflow-hidden border-t border-white/5">
+    <section id="hubungi" className="py-20 bg-[#09090c]/10 backdrop-blur-sm relative overflow-hidden border-t border-white/5">
       {/* Glow */}
       <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#E31E24]/10 rounded-full blur-[140px] pointer-events-none" />
 
