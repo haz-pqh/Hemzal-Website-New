@@ -387,7 +387,7 @@ export const MENU_ITEMS: MenuItem[] = [
     description: 'Coleslaw istimewa hemzal dibuat segar setiap hari dengan kubis rangup, lobak merah halus dan dressing mayonis rahsia chef yang masam manis menyegarkan.',
     price: 3.50,
     category: 'sides',
-    image: 'https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?auto=format&fit=crop&w=900&q=80',
+    image: '/coleslaw.png',
     isBestSeller: true,
     spiceLevel: 0,
     calories: 140,
