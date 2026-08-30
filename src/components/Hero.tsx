@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] pt-25 pb-16 lg:pt-40 lg:pb-24 flex items-center justify-center overflow-hidden bg-neutral-50"
+      className="relative min-h-[92vh] pt-32 pb-16 lg:pt-40 lg:pb-24 flex items-center justify-center overflow-hidden bg-neutral-50"
     >
       {/* Background Ambience Glows */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#E31E24]/10 rounded-full blur-[120px] pointer-events-none" />
