@@ -53,7 +53,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     }
   }
 
-  // Delivery fee is based on real-time Grab Express / Lalamove rates (calculated upon address confirmation)
   const foodTotal = Math.max(0, rawSubtotal - discount);
 
   const handleApplyVoucher = () => {
@@ -80,7 +79,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
     const selectedBranch = BRANCHES.find((b) => b.id === selectedBranchId) || BRANCHES[0];
 
-    // Format rich WhatsApp message text
     let msg = `🍗 *PESANAN HEMZAL CRISPY CHICKEN*\n`;
     msg += `----------------------------------------\n`;
     msg += `👤 *Nama Pelanggan:* ${customerName.trim() || 'Pelanggan Online'}\n`;
@@ -126,13 +124,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
     setGeneratedWaUrl(waUrl);
 
-    // Trigger Lottie Animation Flow
     setIsCheckingOut(true);
     setCheckoutStep(1);
     setCheckoutProgress(15);
   };
 
-  // Manage Lottie Checkout Steps and Redirection
   useEffect(() => {
     if (!isCheckingOut) return;
 
@@ -163,19 +159,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-xs animate-in fade-in duration-200">
       
-      {/* Drawer Panel */}
-      <div className="relative w-full max-w-md sm:max-w-lg bg-[#121216] border-l border-[#FDB913]/30 h-full flex flex-col shadow-2xl text-white">
+      {/* Light Theme Drawer Panel */}
+      <div className="relative w-full max-w-md sm:max-w-lg bg-white border-l border-neutral-200 h-full flex flex-col shadow-2xl text-neutral-900">
         
-        {/* Header featuring signature #FDB913 theme */}
-        <div className="p-5 border-b border-[#FDB913]/30 bg-[#FDB913] text-black flex items-center justify-between">
+        {/* Header in #FDB913 Light Theme */}
+        <div className="p-5 border-b border-amber-500/20 bg-[#FDB913] text-neutral-900 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-black text-[#FDB913] flex items-center justify-center shadow-md">
+            <div className="w-9 h-9 rounded-xl bg-neutral-900 text-[#FDB913] flex items-center justify-center shadow-sm">
               <ShoppingBag className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-black text-lg text-black leading-tight">Troli Pesanan</h3>
+              <h3 className="font-black text-lg text-neutral-900 leading-tight">Troli Pesanan</h3>
               <p className="text-[11px] font-bold text-neutral-800">{cart.length} item dipilih</p>
             </div>
           </div>
@@ -192,7 +188,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             )}
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-black font-black cursor-pointer transition-colors"
+              className="w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 flex items-center justify-center text-neutral-900 font-black cursor-pointer transition-colors"
               aria-label="Tutup troli"
             >
               <X className="w-4 h-4" />
@@ -200,11 +196,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
           </div>
         </div>
 
-        {/* Body Content */}
-        <div data-lenis-prevent className="p-5 overflow-y-auto flex-1 space-y-5 text-sm custom-scrollbar">
+        {/* Light Theme Body Content */}
+        <div data-lenis-prevent className="p-5 overflow-y-auto flex-1 space-y-5 text-sm custom-scrollbar bg-neutral-50/50">
           
-          {/* 1. Order Type Switcher (Delivery vs Pickup) */}
-          <div className="bg-[#18181f] p-1.5 rounded-2xl border border-[#FDB913]/20 grid grid-cols-2 gap-1.5">
+          {/* Order Type Switcher */}
+          <div className="bg-neutral-100 p-1.5 rounded-2xl border border-neutral-200 grid grid-cols-2 gap-1.5">
             <button
               type="button"
               onClick={() => {
@@ -213,8 +209,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               }}
               className={`py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'delivery'
-                  ? 'bg-[#FDB913] text-black shadow-md shadow-[#FDB913]/20'
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'bg-[#FDB913] text-neutral-900 shadow-sm border border-amber-500/30'
+                  : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/50'
               }`}
             >
               <Truck className="w-3.5 h-3.5" />
@@ -229,8 +225,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               }}
               className={`py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'pickup'
-                  ? 'bg-[#FDB913] text-black shadow-md shadow-[#FDB913]/20'
-                  : 'text-neutral-400 hover:text-white'
+                  ? 'bg-[#FDB913] text-neutral-900 shadow-sm border border-amber-500/30'
+                  : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-200/50'
               }`}
             >
               <Store className="w-3.5 h-3.5" />
@@ -240,14 +236,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Delivery or Outlet details */}
           {orderType === 'pickup' ? (
-            <div className="space-y-1.5 bg-[#18181f] p-3.5 rounded-2xl border border-[#FDB913]/20">
-              <label className="text-xs font-black text-[#FDB913] uppercase flex items-center gap-1.5">
+            <div className="space-y-1.5 bg-white p-3.5 rounded-2xl border border-neutral-200/80 shadow-xs">
+              <label className="text-xs font-black text-[#B45309] uppercase flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5" /> Pilih Outlet Pengambilan:
               </label>
               <select
                 value={selectedBranchId}
                 onChange={(e) => setSelectedBranchId(e.target.value)}
-                className="w-full px-3 py-2 bg-[#121216] border border-[#FDB913]/30 rounded-xl text-xs text-white focus:outline-none focus:border-[#FDB913]"
+                className="w-full px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-xl text-xs text-neutral-900 focus:outline-none focus:border-[#D97706] focus:bg-white transition-colors"
               >
                 {BRANCHES.map((b) => (
                   <option key={b.id} value={b.id}>
@@ -257,12 +253,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </select>
             </div>
           ) : (
-            <div className="space-y-2 bg-[#18181f] p-3.5 rounded-2xl border border-[#FDB913]/20">
+            <div className="space-y-2 bg-white p-3.5 rounded-2xl border border-neutral-200/80 shadow-xs">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-black text-[#FDB913] uppercase flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#FDB913]" /> Alamat Penghantaran:
+                <label className="text-xs font-black text-[#B45309] uppercase flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-[#B45309]" /> Alamat Penghantaran:
                 </label>
-                <span className="text-[10px] text-[#FDB913] bg-[#FDB913]/15 border border-[#FDB913]/30 px-2 py-0.5 rounded-full font-bold">
+                <span className="text-[10px] text-[#B45309] bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full font-bold">
                   Kadar Grab / Lalamove
                 </span>
               </div>
@@ -271,10 +267,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 value={deliveryAddress}
                 onChange={(e) => setDeliveryAddress(e.target.value)}
                 placeholder="No rumah, jalan, taman, poskod bandar..."
-                className="w-full px-3 py-2 bg-[#121216] border border-[#FDB913]/30 rounded-xl text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+                className="w-full px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] focus:bg-white transition-colors"
               />
-              <div className="flex items-center gap-1.5 text-[10px] text-neutral-300 bg-[#FDB913]/10 p-2 rounded-lg border border-[#FDB913]/20">
-                <Truck className="w-3.5 h-3.5 text-[#FDB913] shrink-0" />
+              <div className="flex items-center gap-1.5 text-[10px] text-neutral-600 bg-amber-500/10 p-2 rounded-lg border border-amber-500/20">
+                <Truck className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
                 <span>Caj penghantaran bergantung kepada jarak & kadar sebenar <strong>Grab Express / Lalamove</strong>.</span>
               </div>
             </div>
@@ -287,56 +283,56 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               value={customerName}
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Nama anda..."
-              className="px-3 py-2 bg-[#18181f] border border-[#FDB913]/30 rounded-xl text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+              className="px-3 py-2 bg-white border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs"
             />
             <input
               type="tel"
               value={customerPhone}
               onChange={(e) => setCustomerPhone(e.target.value)}
               placeholder="No telefon (cth: 012...)"
-              className="px-3 py-2 bg-[#18181f] border border-[#FDB913]/30 rounded-xl text-xs text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+              className="px-3 py-2 bg-white border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs"
             />
           </div>
 
           {/* Cart Item List */}
           {cart.length === 0 ? (
-            <div className="text-center py-12 space-y-3 bg-[#18181f] rounded-3xl border border-[#FDB913]/20">
-              <ShoppingBag className="w-12 h-12 text-[#FDB913]/40 mx-auto" />
-              <h4 className="font-bold text-white text-base">Troli Anda Masih Kosong</h4>
-              <p className="text-xs text-neutral-400 max-w-xs mx-auto">
+            <div className="text-center py-12 space-y-3 bg-white rounded-3xl border border-neutral-200/80 shadow-xs">
+              <ShoppingBag className="w-12 h-12 text-[#D97706]/50 mx-auto" />
+              <h4 className="font-bold text-neutral-900 text-base">Troli Anda Masih Kosong</h4>
+              <p className="text-xs text-neutral-500 max-w-xs mx-auto">
                 Pilih mana-mana hidangan kegemaran anda dari menu untuk mula memesan.
               </p>
             </div>
           ) : (
             <div className="space-y-3">
-              <h4 className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
+              <h4 className="text-xs font-bold text-neutral-500 uppercase tracking-wider">
                 Senarai Makanan ({cart.length})
               </h4>
 
               {cart.map((cartItem) => (
                 <div
                   key={cartItem.cartId}
-                  className="bg-[#18181f] p-3.5 rounded-2xl border border-[#FDB913]/20 flex gap-3 items-start"
+                  className="bg-white p-3.5 rounded-2xl border border-neutral-200/80 flex gap-3 items-start shadow-xs"
                 >
                   <img
                     src={cartItem.item.image}
                     alt={cartItem.item.name}
-                    className="w-16 h-16 rounded-xl object-cover shrink-0 border border-[#FDB913]/30"
+                    className="w-16 h-16 rounded-xl object-cover shrink-0 border border-neutral-200"
                   />
 
                   <div className="flex-1 min-w-0 space-y-1">
                     <div className="flex items-start justify-between gap-1">
-                      <h5 className="font-black text-xs text-white leading-tight truncate">
+                      <h5 className="font-black text-xs text-neutral-900 leading-tight truncate">
                         {cartItem.item.name}
                         {cartItem.selectedPortion && (
-                          <span className="text-[#FDB913] font-bold ml-1">
+                          <span className="text-[#B45309] font-bold ml-1">
                             ({cartItem.selectedPortion.label})
                           </span>
                         )}
                       </h5>
                       <button
                         onClick={() => onRemoveItem(cartItem.cartId)}
-                        className="text-neutral-500 hover:text-[#E31E24] p-0.5 cursor-pointer transition-colors"
+                        className="text-neutral-400 hover:text-[#E31E24] p-0.5 cursor-pointer transition-colors"
                         title="Padam item"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -344,42 +340,42 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     </div>
 
                     {cartItem.selectedDip && (
-                      <p className="text-[11px] text-[#FDB913] font-medium truncate">
+                      <p className="text-[11px] text-[#B45309] font-medium truncate">
                         Sos: {cartItem.selectedDip}
                       </p>
                     )}
 
                     {cartItem.selectedAddons.length > 0 && (
-                      <p className="text-[10px] text-neutral-400 truncate">
+                      <p className="text-[10px] text-neutral-500 truncate">
                         + {cartItem.selectedAddons.map((a) => a.name).join(', ')}
                       </p>
                     )}
 
                     {cartItem.specialInstructions && (
-                      <p className="text-[10px] text-neutral-400 italic">
+                      <p className="text-[10px] text-neutral-500 italic">
                         "{cartItem.specialInstructions}"
                       </p>
                     )}
 
                     <div className="flex items-center justify-between pt-1">
-                      <span className="font-black text-sm text-[#FDB913]">
+                      <span className="font-black text-sm text-[#B45309]">
                         RM {cartItem.totalPrice.toFixed(2)}
                       </span>
 
                       {/* Quantity buttons */}
-                      <div className="flex items-center gap-1 bg-[#121216] rounded-lg border border-[#FDB913]/30 p-0.5">
+                      <div className="flex items-center gap-1 bg-neutral-100 rounded-lg border border-neutral-300 p-0.5">
                         <button
                           onClick={() => onUpdateQuantity(cartItem.cartId, -1)}
-                          className="w-6 h-6 rounded flex items-center justify-center text-neutral-300 hover:bg-[#FDB913]/20 hover:text-[#FDB913] cursor-pointer transition-colors"
+                          className="w-6 h-6 rounded flex items-center justify-center text-neutral-700 hover:bg-neutral-200 hover:text-black cursor-pointer transition-colors"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="w-5 text-center text-xs font-bold text-white">
+                        <span className="w-5 text-center text-xs font-bold text-neutral-900">
                           {cartItem.quantity}
                         </span>
                         <button
                           onClick={() => onUpdateQuantity(cartItem.cartId, 1)}
-                          className="w-6 h-6 rounded flex items-center justify-center text-neutral-300 hover:bg-[#FDB913]/20 hover:text-[#FDB913] cursor-pointer transition-colors"
+                          className="w-6 h-6 rounded flex items-center justify-center text-neutral-700 hover:bg-neutral-200 hover:text-black cursor-pointer transition-colors"
                         >
                           <Plus className="w-3 h-3" />
                         </button>
@@ -393,22 +389,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Voucher Promo Input */}
           {cart.length > 0 && (
-            <div className="bg-[#18181f] p-3.5 rounded-2xl border border-[#FDB913]/20 space-y-2">
-              <label className="text-xs font-bold text-neutral-300 uppercase flex items-center gap-1.5">
-                <Tag className="w-3.5 h-3.5 text-[#FDB913]" /> Kod Baucar Diskaun
+            <div className="bg-white p-3.5 rounded-2xl border border-neutral-200/80 space-y-2 shadow-xs">
+              <label className="text-xs font-bold text-neutral-700 uppercase flex items-center gap-1.5">
+                <Tag className="w-3.5 h-3.5 text-[#D97706]" /> Kod Baucar Diskaun
               </label>
 
               {appliedVoucher ? (
-                <div className="flex items-center justify-between bg-[#FDB913]/15 border border-[#FDB913]/40 p-2.5 rounded-xl text-xs text-[#FDB913]">
+                <div className="flex items-center justify-between bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-xl text-xs text-[#B45309]">
                   <div className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#FDB913]" />
+                    <Check className="w-4 h-4 text-[#B45309]" />
                     <span>
                       Kod <strong>{appliedVoucher.code}</strong> digunakan!
                     </span>
                   </div>
                   <button
                     onClick={() => setAppliedVoucher(null)}
-                    className="text-neutral-400 hover:text-white font-bold text-[11px]"
+                    className="text-neutral-500 hover:text-neutral-900 font-bold text-[11px]"
                   >
                     Padam
                   </button>
@@ -420,12 +416,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     value={voucherCodeInput}
                     onChange={(e) => setVoucherCodeInput(e.target.value)}
                     placeholder="Masukkan kod (cth: HEMZALFIRST)"
-                    className="flex-1 px-3 py-2 bg-[#121216] border border-[#FDB913]/30 rounded-xl text-xs text-white uppercase placeholder:normal-case placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+                    className="flex-1 px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-xl text-xs text-neutral-900 uppercase placeholder:normal-case placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] focus:bg-white"
                   />
                   <button
                     type="button"
                     onClick={handleApplyVoucher}
-                    className="px-4 py-2 bg-[#FDB913] hover:bg-[#e0a410] text-black font-black text-xs uppercase rounded-xl transition-all cursor-pointer shadow-sm"
+                    className="px-4 py-2 bg-[#FDB913] hover:bg-[#e0a410] text-neutral-900 font-black text-xs uppercase rounded-xl transition-all cursor-pointer shadow-xs"
                   >
                     Tebus
                   </button>
@@ -440,19 +436,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
         </div>
 
-        {/* Footer Checkout Summary */}
+        {/* Footer Checkout Summary - Light Theme */}
         {cart.length > 0 && (
-          <div className="p-5 border-t border-[#FDB913]/30 bg-[#16161c] space-y-3">
+          <div className="p-5 border-t border-neutral-200 bg-white space-y-3 shadow-lg">
             
             {/* Breakdown */}
-            <div className="space-y-1.5 text-xs text-neutral-300">
+            <div className="space-y-1.5 text-xs text-neutral-600">
               <div className="flex justify-between">
                 <span>Subtotal Makanan</span>
-                <span className="font-bold text-white">RM {rawSubtotal.toFixed(2)}</span>
+                <span className="font-bold text-neutral-900">RM {rawSubtotal.toFixed(2)}</span>
               </div>
 
               {discount > 0 && (
-                <div className="flex justify-between text-[#FDB913] font-bold">
+                <div className="flex justify-between text-[#B45309] font-bold">
                   <span>Diskaun Baucar ({appliedVoucher?.code})</span>
                   <span>- RM {discount.toFixed(2)}</span>
                 </div>
@@ -461,29 +457,29 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               {orderType === 'delivery' && (
                 <div className="flex justify-between items-center text-xs">
                   <span>Caj Penghantaran (Grab / Lalamove)</span>
-                  <span className="text-[#FDB913] font-bold text-[11px]">
+                  <span className="text-[#B45309] font-bold text-[11px]">
                     Mengikut kadar semasa
                   </span>
                 </div>
               )}
 
-              <div className="flex justify-between text-sm font-black text-white pt-2 border-t border-white/10">
+              <div className="flex justify-between text-sm font-black text-neutral-900 pt-2 border-t border-neutral-200">
                 <span>Jumlah Makanan</span>
-                <span className="text-xl font-black text-[#FDB913]">RM {foodTotal.toFixed(2)}</span>
+                <span className="text-2xl font-black text-[#B45309]">RM {foodTotal.toFixed(2)}</span>
               </div>
             </div>
 
-            {/* WhatsApp Checkout Button */}
+            {/* WhatsApp Checkout Button in #FDB913 */}
             <button
               onClick={handleCheckoutWhatsApp}
               disabled={isCheckingOut}
-              className="w-full py-4 rounded-2xl bg-[#FDB913] hover:bg-[#e0a410] disabled:opacity-75 disabled:cursor-not-allowed text-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-[#FDB913]/25 transition-all cursor-pointer group"
+              className="w-full py-4 rounded-2xl bg-[#FDB913] hover:bg-[#e0a410] disabled:opacity-75 disabled:cursor-not-allowed text-neutral-900 font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#FDB913]/30 transition-all cursor-pointer group"
             >
-              <MessageSquare className="w-5 h-5 fill-black group-hover:scale-110 transition-transform" />
+              <MessageSquare className="w-5 h-5 fill-neutral-900 group-hover:scale-110 transition-transform" />
               <span>Hantar Pesanan ke WhatsApp • RM {foodTotal.toFixed(2)}</span>
             </button>
 
-            <p className="text-[10px] text-center text-neutral-400">
+            <p className="text-[10px] text-center text-neutral-500">
               {orderType === 'delivery'
                 ? 'Caj rider Grab Express / Lalamove akan disemak dan dimaklumkan melalui WhatsApp mengikut alamat anda.'
                 : 'Pesanan anda akan dihantar terus kepada staf dapur outlet untuk persediaan pantas.'}
@@ -494,14 +490,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
       </div>
 
-      {/* Lottie-Based Checkout Loading Overlay */}
+      {/* Light Theme Lottie-Based Checkout Loading Overlay */}
       {isCheckingOut && (
-        <div className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-200">
-          <div className="w-full max-w-sm bg-[#16161d] border border-[#FDB913]/40 rounded-3xl p-6 sm:p-7 text-center shadow-2xl space-y-4 relative overflow-hidden">
+        <div className="fixed inset-0 z-[60] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-200">
+          <div className="w-full max-w-sm bg-white border border-neutral-200 rounded-3xl p-6 sm:p-7 text-center shadow-2xl space-y-4 relative overflow-hidden text-neutral-900">
             
             {/* Top & bottom gradient glows */}
-            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-32 bg-[#FDB913]/20 blur-3xl pointer-events-none rounded-full" />
-            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-48 h-32 bg-[#FDB913]/20 blur-3xl pointer-events-none rounded-full" />
+            <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-32 bg-[#FDB913]/25 blur-3xl pointer-events-none rounded-full" />
+            <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-48 h-32 bg-[#FDB913]/25 blur-3xl pointer-events-none rounded-full" />
 
             {/* Animated Order Preparation Graphics */}
             <div className="relative w-44 h-44 mx-auto flex items-center justify-center">
@@ -510,17 +506,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
             {/* Status Headings & Dynamic Steps */}
             <div className="space-y-1 relative z-10">
-              <span className="inline-flex items-center gap-1.5 bg-[#FDB913]/20 text-[#FDB913] border border-[#FDB913]/40 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
-                <Sparkles className="w-3 h-3 text-[#FDB913]" /> Memproses Pesanan Hemzal
+              <span className="inline-flex items-center gap-1.5 bg-amber-500/10 text-[#B45309] border border-amber-500/30 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
+                <Sparkles className="w-3 h-3 text-[#D97706]" /> Memproses Pesanan Hemzal
               </span>
               
-              <h3 className="text-xl font-black text-white pt-1">
+              <h3 className="text-xl font-black text-neutral-900 pt-1">
                 {checkoutStep === 1 && "🍗 Menyusun Pesanan Dapur..."}
                 {checkoutStep === 2 && "🛵 Menyemak Kaedah Penghantaran..."}
                 {checkoutStep === 3 && "💬 Menghubungkan ke WhatsApp..."}
               </h3>
 
-              <p className="text-xs text-neutral-300 min-h-[32px] flex items-center justify-center">
+              <p className="text-xs text-neutral-600 min-h-[32px] flex items-center justify-center">
                 {checkoutStep === 1 && "Mengira jumlah potongan harga & sos celup istimewa..."}
                 {checkoutStep === 2 && "Menyediakan butiran pesanan untuk dapur & rider Grab/Lalamove..."}
                 {checkoutStep === 3 && "Membuka WhatsApp Admin rasmi (+60 16-417 5976)..."}
@@ -528,7 +524,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             </div>
 
             {/* Animated Progress Bar */}
-            <div className="w-full bg-[#101014] h-2.5 rounded-full overflow-hidden border border-[#FDB913]/30 p-0.5">
+            <div className="w-full bg-neutral-100 h-2.5 rounded-full overflow-hidden border border-neutral-200 p-0.5">
               <div
                 className="h-full bg-[#FDB913] rounded-full transition-all duration-300 ease-out"
                 style={{ width: `${checkoutProgress}%` }}
@@ -544,7 +540,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 onClick={() => {
                   setIsCheckingOut(false);
                 }}
-                className="w-full py-3 px-4 rounded-xl bg-[#FDB913] hover:bg-[#e0a410] text-black font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-[#FDB913]/30 transition-all cursor-pointer"
+                className="w-full py-3 px-4 rounded-xl bg-[#FDB913] hover:bg-[#e0a410] text-neutral-900 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer"
               >
                 <ExternalLink className="w-4 h-4" />
                 <span>Buka WhatsApp Sekarang</span>
@@ -557,13 +553,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     onClearCart();
                     onClose();
                   }}
-                  className="flex-1 py-2 text-[11px] font-semibold text-neutral-400 hover:text-[#FDB913] bg-white/5 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+                  className="flex-1 py-2 text-[11px] font-bold text-neutral-600 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Selesai & Kosongkan
                 </button>
                 <button
                   onClick={() => setIsCheckingOut(false)}
-                  className="flex-1 py-2 text-[11px] font-semibold text-neutral-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors cursor-pointer"
+                  className="flex-1 py-2 text-[11px] font-bold text-neutral-600 hover:text-neutral-900 bg-neutral-100 hover:bg-neutral-200 rounded-xl transition-colors cursor-pointer"
                 >
                   Tutup Status
                 </button>
