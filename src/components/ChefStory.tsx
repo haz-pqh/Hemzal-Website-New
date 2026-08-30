@@ -158,17 +158,6 @@ export const ChefStory: React.FC = () => {
                     <span>Dijamin 100% Halal dan suci oleh pembekal tempatan bertauliah.</span>
                   </div>
                 </div>
-
-                {/* Interactive Crunch Tryout */}
-                <div className="pt-2">
-                  <button
-                    onClick={playCrunchSound}
-                    className="inline-flex items-center gap-2 bg-[#E31E24] hover:bg-[#FDB913] text-white hover:text-neutral-900 font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition-all cursor-pointer shadow-lg shadow-[#E31E24]/20"
-                  >
-                    <Volume2 className="w-4 h-4" />
-                    <span>Uji Bunyi Kerangupan Pillar Ini</span>
-                  </button>
-                </div>
               </div>
             </div>
           </div>
