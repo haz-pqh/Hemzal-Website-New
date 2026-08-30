@@ -1,5 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, MapPin, Phone, Menu, X, UtensilsCrossed, Award } from 'lucide-react';
+import { 
+  ShoppingBag, 
+  MapPin, 
+  Phone, 
+  Menu, 
+  X, 
+  UtensilsCrossed, 
+  Award,
+  Home,
+  Flame,
+  Utensils,
+  Star,
+  MessageSquareText
+} from 'lucide-react';
 import { playPopSound } from '../utils/sound';
 import logo from '/icon.png';
 
@@ -26,12 +39,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { label: 'Utama', href: '#home' },
-    { label: 'Rahsia Chef', href: '#resepi' },
-    { label: 'Menu & Harga', href: '#menu', badge: 'Hot' },
-    { label: 'Cawangan', href: '#cawangan' },
-    { label: 'Ulasan', href: '#testimoni' },
-    { label: 'Hubungi', href: '#hubungi' },
+    { label: 'Utama', href: '#home', icon: Home },
+    { label: 'Resepi', href: '#resepi', icon: Flame },
+    { label: 'Menu', href: '#menu', badge: 'Hot', icon: Utensils },
+    { label: 'Lokasi', href: '#cawangan', icon: MapPin },
+    { label: 'Ulasan', href: '#testimoni', icon: Star },
+    { label: 'Hubungi', href: '#hubungi', icon: MessageSquareText },
   ];
 
   return (
@@ -69,23 +82,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="relative px-3.5 py-2 rounded-xl text-sm font-black text-neutral-900 hover:text-black hover:bg-black/10 transition-all flex items-center gap-1.5 group"
-              >
-                <span>{link.label}</span>
-                {link.badge && (
-                  <span className="bg-[#E31E24] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase leading-none shadow-sm group-hover:scale-105 transition-transform">
-                    {link.badge}
-                  </span>
-                )}
-                <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#E31E24] opacity-0 group-hover:opacity-100 transition-opacity" />
-              </a>
-            ))}
+          {/* Interactive Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 bg-black/5 p-1.5 rounded-2xl border border-black/5">
+            {navLinks.map((link) => {
+              const IconComponent = link.icon;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={playPopSound}
+                  className="relative px-3.5 py-2 rounded-xl text-xs xl:text-sm font-extrabold text-neutral-900 hover:text-white hover:bg-neutral-900 transition-all duration-200 flex items-center gap-2 group active:scale-95 shadow-2xs hover:shadow-md"
+                >
+                  <IconComponent className="w-4 h-4 text-neutral-800 group-hover:text-[#FDB913] transition-colors shrink-0 group-hover:scale-110" />
+                  <span>{link.label}</span>
+                  {link.badge && (
+                    <span className="bg-[#E31E24] text-white text-[9px] font-black px-1.5 py-0.5 rounded-full uppercase leading-none shadow-sm group-hover:bg-[#FDB913] group-hover:text-black transition-colors animate-pulse">
+                      {link.badge}
+                    </span>
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           {/* Action Buttons */}
@@ -156,53 +173,31 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-[#FDB913] border-b border-amber-600/30 px-6 py-5 space-y-4 shadow-2xl animate-in slide-in-from-top-3 duration-200 max-h-[calc(100vh-100px)] overflow-y-auto">
-            <div className="flex flex-col space-y-1 font-black text-sm">
-              <a
-                href="#home"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span>Laman Utama</span>
-              </a>
-              <a
-                href="#resepi"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span>Rahsia & Resepi Chef</span>
-              </a>
-              <a
-                href="#menu"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span>Menu & Senarai Harga</span>
-                <span className="text-[10px] text-white bg-[#E31E24] px-2 py-0.5 rounded-full font-black">Panas!</span>
-              </a>
-              <a
-                href="#cawangan"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-4 h-4 text-[#E31E24]" /> Cawangan Outlet
-                </span>
-                <span className="text-[11px] text-white bg-neutral-900 px-2 py-0.5 rounded-md font-bold">4 Outlet</span>
-              </a>
-              <a
-                href="#testimoni"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span>Review & Testimoni</span>
-              </a>
-              <a
-                href="#hubungi"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-neutral-900 hover:text-black py-2.5 px-3 rounded-lg hover:bg-black/10 transition-colors flex items-center justify-between"
-              >
-                <span>Hubungi Kami</span>
-              </a>
+            <div className="flex flex-col space-y-1.5 font-extrabold text-sm">
+              {navLinks.map((link) => {
+                const IconComponent = link.icon;
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => {
+                      playPopSound();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="text-neutral-900 hover:text-white hover:bg-neutral-900 py-3 px-3.5 rounded-xl transition-all flex items-center justify-between active:scale-98"
+                  >
+                    <span className="flex items-center gap-3">
+                      <IconComponent className="w-4 h-4 text-[#E31E24]" />
+                      {link.label}
+                    </span>
+                    {link.badge && (
+                      <span className="text-[10px] text-white bg-[#E31E24] px-2 py-0.5 rounded-full font-black">
+                        {link.badge}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
             </div>
 
             <div className="pt-3 border-t border-amber-600/30 flex flex-col gap-2.5">
