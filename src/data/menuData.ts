@@ -347,7 +347,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 53.90,
     originalPrice: 57.00,
     category: 'combos',
-    image: 'https://images.unsplash.com/photo-1513639776629-7b61b0ac49cb?auto=format&fit=crop&w=900&q=80',
+    image: '/wallpaper.png',
     isBestSeller: true,
     isChefSpecial: true,
     spiceLevel: 2,
