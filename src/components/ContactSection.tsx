@@ -77,24 +77,24 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="hubungi" className="py-20 bg-[#09090c]/80 backdrop-blur-sm relative overflow-hidden border-t border-white/5">
-      {/* Glow */}
-      <div className="absolute top-1/2 right-10 w-96 h-96 bg-[#E31E24]/10 rounded-full blur-[140px] pointer-events-none" />
+    <section id="hubungi" className="py-20 bg-neutral-50 border-b border-neutral-200/80 relative overflow-hidden">
+      {/* Subtle Ambient Red Glow */}
+      <div className="absolute top-1/2 right-10 -translate-y-1/2 w-96 h-96 bg-[radial-gradient(ellipse_at_center,rgba(227,30,36,0.05),transparent_70%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-[#16161b] border border-[#FDB913]/30 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#FDB913]">
-            <MessageSquare className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/20 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#B45309]">
+            <MessageSquare className="w-3.5 h-3.5 text-[#D97706]" />
             <span>Khidmat Pelanggan & Maklum Balas</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
-            HUBUNGI & <span className="text-[#FDB913]">SOALAN LAZIM (FAQ)</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 uppercase tracking-tight">
+            HUBUNGI & <span className="text-[#D97706] drop-shadow-[0_2px_10px_rgba(217,119,6,0.15)]">SOALAN LAZIM (FAQ)</span>
           </h2>
 
-          <p className="text-neutral-300 text-sm sm:text-base">
+          <p className="text-neutral-700 text-sm sm:text-base font-medium">
             Ada sebarang pertanyaan mengenai penghantaran, tahap kepedasan, atau tempahan majlis? Ketahui jawapannya di bawah atau hantar mesej terus kepada kami.
           </p>
         </div>
@@ -102,8 +102,8 @@ export const ContactSection: React.FC = () => {
         {/* Collapsible FAQ Accordion Section */}
         <div className="mb-16 max-w-4xl mx-auto">
           <div className="flex items-center gap-2 mb-6 justify-center sm:justify-start">
-            <HelpCircle className="w-5 h-5 text-[#FDB913]" />
-            <h3 className="text-xl font-black text-white uppercase tracking-tight">
+            <HelpCircle className="w-5 h-5 text-[#D97706]" />
+            <h3 className="text-xl font-black text-neutral-900 uppercase tracking-tight">
               Soalan Lazim Pelanggan (FAQ)
             </h3>
           </div>
@@ -119,8 +119,8 @@ export const ContactSection: React.FC = () => {
                   id={faq.id}
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isOpen
-                      ? 'bg-[#15151b] border-[#FDB913]/50 shadow-lg shadow-black/40'
-                      : 'bg-[#111115] border-white/10 hover:border-white/20 hover:bg-[#141419]'
+                      ? 'bg-white border-[#D97706]/50 shadow-md'
+                      : 'bg-white border-neutral-200/80 hover:border-neutral-300 hover:bg-neutral-50/50 shadow-sm'
                   }`}
                 >
                   <button
@@ -133,17 +133,17 @@ export const ContactSection: React.FC = () => {
                       <div
                         className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                           isOpen
-                            ? 'bg-[#FDB913] text-black font-black'
-                            : 'bg-white/5 text-[#FDB913] border border-white/10'
+                            ? 'bg-[#D97706] text-white font-black'
+                            : 'bg-amber-500/10 text-[#D97706] border border-amber-500/20'
                         }`}
                       >
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] text-[#FDB913] uppercase font-bold tracking-wider block">
+                        <span className="text-[10px] text-[#B45309] uppercase font-bold tracking-wider block">
                           {faq.category}
                         </span>
-                        <h4 className="text-sm sm:text-base font-bold text-white leading-snug">
+                        <h4 className="text-sm sm:text-base font-bold text-neutral-900 leading-snug">
                           {faq.question}
                         </h4>
                       </div>
@@ -153,7 +153,7 @@ export const ContactSection: React.FC = () => {
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-300 ${
                         isOpen
                           ? 'rotate-180 bg-[#E31E24] text-white border-[#E31E24]'
-                          : 'bg-white/5 text-neutral-400 border-white/10'
+                          : 'bg-neutral-100 text-neutral-500 border-neutral-200'
                       }`}
                     >
                       <ChevronDown className="w-4 h-4" />
@@ -168,7 +168,7 @@ export const ContactSection: React.FC = () => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25, ease: 'easeInOut' }}
                       >
-                        <div className="px-5 sm:px-6 pb-6 pt-1 border-t border-white/5 text-neutral-300 text-xs sm:text-sm leading-relaxed pl-16 sm:pl-20">
+                        <div className="px-5 sm:px-6 pb-6 pt-1 border-t border-neutral-200/80 text-neutral-600 text-xs sm:text-sm leading-relaxed pl-16 sm:pl-20">
                           {faq.answer}
                         </div>
                       </motion.div>
@@ -187,57 +187,57 @@ export const ContactSection: React.FC = () => {
             
             {/* WhatsApp Box */}
             <a
-              href="https://wa.me/60164175976?text=Hai%20Hemzal%20Crispy%20Chicken,%20saya%20ada%20pertanyaan."
+              href="https://wa.me/601121992135?text=Hai%20Hemzal%20Crispy%20Chicken,%20saya%20ada%20pertanyaan."
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-3xl bg-[#141418] hover:bg-[#191920] border border-white/10 hover:border-[#25D366]/50 transition-all duration-300 flex items-center gap-4 group block shadow-lg"
+              className="p-6 rounded-3xl bg-white hover:bg-neutral-50/50 border border-neutral-200/80 hover:border-[#25D366]/50 transition-all duration-300 flex items-center gap-4 group block shadow-sm hover:shadow-md"
             >
-              <div className="w-14 h-14 rounded-2xl bg-[#25D366]/20 flex items-center justify-center text-[#25D366] group-hover:scale-110 transition-transform shrink-0">
+              <div className="w-14 h-14 rounded-2xl bg-[#25D366]/15 flex items-center justify-center text-[#25D366] group-hover:scale-110 transition-transform shrink-0">
                 <MessageSquare className="w-7 h-7" />
               </div>
               <div>
                 <span className="text-[10px] uppercase font-bold text-[#25D366] tracking-wider">
                   Respons Pantas (WhatsApp)
                 </span>
-                <h4 className="font-black text-base text-white">+60 16-417 5976</h4>
-                <p className="text-xs text-neutral-400">Tekan untuk sembang terus bersama admin</p>
+                <h4 className="font-black text-base text-neutral-900">+60 11-2199 2135</h4>
+                <p className="text-xs text-neutral-600">Tekan untuk sembang terus bersama admin</p>
               </div>
             </a>
 
             {/* Email Box */}
-            <div className="p-6 rounded-3xl bg-[#141418] border border-white/10 flex items-center gap-4 shadow-lg">
-              <div className="w-14 h-14 rounded-2xl bg-[#FDB913]/20 flex items-center justify-center text-[#FDB913] shrink-0">
+            <div className="p-6 rounded-3xl bg-white border border-neutral-200/80 flex items-center gap-4 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center text-[#D97706] shrink-0">
                 <Mail className="w-7 h-7" />
               </div>
               <div>
-                <span className="text-[10px] uppercase font-bold text-[#FDB913] tracking-wider">
+                <span className="text-[10px] uppercase font-bold text-[#B45309] tracking-wider">
                   Email Rasmi
                 </span>
-                <h4 className="font-black text-base text-white">hello@hemzalcrispychicken.com</h4>
-                <p className="text-xs text-neutral-400">Untuk pertanyaan media & rasmi</p>
+                <h4 className="font-black text-base text-neutral-900">hello@hemzalcrispychicken.com</h4>
+                <p className="text-xs text-neutral-600">Untuk pertanyaan media & rasmi</p>
               </div>
             </div>
 
             {/* Operating Hours Box */}
-            <div className="p-6 rounded-3xl bg-[#141418] border border-white/10 flex items-center gap-4 shadow-lg">
-              <div className="w-14 h-14 rounded-2xl bg-[#E31E24]/20 flex items-center justify-center text-[#E31E24] shrink-0">
+            <div className="p-6 rounded-3xl bg-white border border-neutral-200/80 flex items-center gap-4 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-[#E31E24]/10 flex items-center justify-center text-[#E31E24] shrink-0">
                 <Clock className="w-7 h-7" />
               </div>
               <div>
                 <span className="text-[10px] uppercase font-bold text-[#E31E24] tracking-wider">
                   Waktu Operasi Dapur
                 </span>
-                <h4 className="font-black text-base text-white">10:30 AM – 11:00 PM</h4>
-                <p className="text-xs text-neutral-400">Dibuka 7 hari seminggu (Termasuk Cuti Umum)</p>
+                <h4 className="font-black text-base text-neutral-900">10:30 AM – 11:00 PM</h4>
+                <p className="text-xs text-neutral-600">Dibuka 7 hari seminggu (Termasuk Cuti Umum)</p>
               </div>
             </div>
 
             {/* HQ Address Box */}
-            <div className="p-6 rounded-3xl bg-gradient-to-r from-[#17171e] to-[#121216] border border-white/10 space-y-2">
-              <h4 className="font-black text-sm text-white flex items-center gap-2">
-                <Flame className="w-4 h-4 text-[#FDB913]" /> Ibu Pejabat & Dapur Pusat Hemzal
+            <div className="p-6 rounded-3xl bg-white border border-neutral-200/80 space-y-2 shadow-sm">
+              <h4 className="font-black text-sm text-neutral-900 flex items-center gap-2">
+                <Flame className="w-4 h-4 text-[#D97706]" /> Ibu Pejabat & Dapur Pusat Hemzal
               </h4>
-              <p className="text-xs text-neutral-400 leading-relaxed">
+              <p className="text-xs text-neutral-600 leading-relaxed">
                 No. 24G & 26G, Jalan Pandan Indah 4/6, Pandan Indah, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.
               </p>
             </div>
@@ -245,14 +245,14 @@ export const ContactSection: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form */}
-          <div className="lg:col-span-7 bg-[#141419] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl">
+          <div className="lg:col-span-7 bg-white border border-neutral-200/80 rounded-3xl p-6 sm:p-10 shadow-lg">
             {submitted ? (
               <div className="text-center py-12 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/15 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-500/30">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-black text-white">Mesej Anda Berjaya Dihantar!</h3>
-                <p className="text-sm text-neutral-300 max-w-md mx-auto">
+                <h3 className="text-2xl font-black text-neutral-900">Mesej Anda Berjaya Dihantar!</h3>
+                <p className="text-sm text-neutral-700 max-w-md mx-auto">
                   Terima kasih, <strong>{formData.name}</strong>. Pegawai perhubungan pelanggan Hemzal akan membalas emel/telefon anda dalam masa 24 jam.
                 </p>
                 <button
@@ -260,7 +260,7 @@ export const ContactSection: React.FC = () => {
                     setSubmitted(false);
                     setFormData({ name: '', email: '', phone: '', subject: 'Pertanyaan Umum', message: '' });
                   }}
-                  className="mt-4 px-6 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                  className="mt-4 px-6 py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 rounded-xl text-xs font-bold border border-neutral-300/80 transition-colors cursor-pointer"
                 >
                   Hantar Mesej Lain
                 </button>
@@ -268,13 +268,13 @@ export const ContactSection: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-1">
-                  <h3 className="text-xl font-black text-white">Borang Mesej Pantas</h3>
-                  <p className="text-xs text-neutral-400">Isi maklumat anda dan kami akan menghubungi anda segera.</p>
+                  <h3 className="text-xl font-black text-neutral-900">Borang Mesej Pantas</h3>
+                  <p className="text-xs text-neutral-600">Isi maklumat anda dan kami akan menghubungi anda segera.</p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-neutral-300 uppercase">
+                    <label className="text-xs font-bold text-neutral-700 uppercase">
                       Nama Penuh <span className="text-[#E31E24]">*</span>
                     </label>
                     <input
@@ -283,12 +283,12 @@ export const ContactSection: React.FC = () => {
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="Cth: Ahmad Danial"
-                      className="w-full px-4 py-3 bg-[#1a1a22] border border-white/10 rounded-xl text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+                      className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:bg-white focus:border-[#D97706] transition-colors shadow-sm"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-neutral-300 uppercase">
+                    <label className="text-xs font-bold text-neutral-700 uppercase">
                       Alamat Email <span className="text-[#E31E24]">*</span>
                     </label>
                     <input
@@ -297,14 +297,14 @@ export const ContactSection: React.FC = () => {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="Cth: ahmad@gmail.com"
-                      className="w-full px-4 py-3 bg-[#1a1a22] border border-white/10 rounded-xl text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+                      className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:bg-white focus:border-[#D97706] transition-colors shadow-sm"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-neutral-300 uppercase">
+                    <label className="text-xs font-bold text-neutral-700 uppercase">
                       Nombor Telefon (WhatsApp)
                     </label>
                     <input
@@ -312,18 +312,18 @@ export const ContactSection: React.FC = () => {
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="Cth: 012-3456789"
-                      className="w-full px-4 py-3 bg-[#1a1a22] border border-white/10 rounded-xl text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
+                      className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:bg-white focus:border-[#D97706] transition-colors shadow-sm"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-neutral-300 uppercase">
+                    <label className="text-xs font-bold text-neutral-700 uppercase">
                       Tujuan Mesej
                     </label>
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#1a1a22] border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FDB913]"
+                      className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300/80 rounded-xl text-sm text-neutral-900 focus:outline-none focus:bg-white focus:border-[#D97706] transition-colors shadow-sm"
                     >
                       <option value="Pertanyaan Umum">Pertanyaan Umum</option>
                       <option value="Tempahan Katering">Tempahan Katering & Acara</option>
@@ -334,7 +334,7 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-neutral-300 uppercase">
+                  <label className="text-xs font-bold text-neutral-700 uppercase">
                     Mesej Anda <span className="text-[#E31E24]">*</span>
                   </label>
                   <textarea
@@ -343,13 +343,13 @@ export const ContactSection: React.FC = () => {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Tuliskan butiran pertanyaan atau mesej anda di sini..."
-                    className="w-full px-4 py-3 bg-[#1a1a22] border border-white/10 rounded-xl text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913] resize-none"
+                    className="w-full px-4 py-3 bg-neutral-50 border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:bg-white focus:border-[#D97706] transition-colors shadow-sm resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-gradient-to-r from-[#E31E24] to-[#C1121F] hover:from-[#FDB913] hover:to-[#e39600] text-white hover:text-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-[#E31E24]/30 transition-all cursor-pointer"
+                  className="w-full py-4 rounded-xl bg-[#E31E24] hover:bg-[#FDB913] text-white hover:text-black font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-md shadow-[#E31E24]/20 transition-all cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>Hantar Mesej Sekarang</span>
