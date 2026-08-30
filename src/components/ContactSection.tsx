@@ -227,7 +227,7 @@ export const ContactSection: React.FC = () => {
                 <span className="text-[10px] uppercase font-bold text-[#E31E24] tracking-wider">
                   Waktu Operasi Dapur
                 </span>
-                <h4 className="font-black text-base text-neutral-900">10:30 AM – 11:00 PM</h4>
+                <h4 className="font-black text-base text-neutral-900">11:00 AM – 6:30 PM</h4>
                 <p className="text-xs text-neutral-500">Dibuka 7 hari seminggu (Termasuk Cuti Umum)</p>
               </div>
             </div>
@@ -235,10 +235,10 @@ export const ContactSection: React.FC = () => {
             {/* HQ Address Box */}
             <div className="p-6 rounded-3xl bg-white border border-neutral-200/90 space-y-2 shadow-xl shadow-black/10">
               <h4 className="font-black text-sm text-neutral-900 flex items-center gap-2">
-                <Flame className="w-4 h-4 text-[#E31E24]" /> Ibu Pejabat & Dapur Pusat Hemzal
+                <Flame className="w-4 h-4 text-[#E31E24]" /> HQ Hemzal Crispy Chicken
               </h4>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                No. 24G & 26G, Jalan Pandan Indah 4/6, Pandan Indah, 55100 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur.
+                Jalan 16A, Taman Dato Ahmad Razali, 68000 Ampang, Selangor
               </p>
             </div>
 
