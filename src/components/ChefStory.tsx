@@ -41,32 +41,32 @@ export const ChefStory: React.FC = () => {
   ];
 
   return (
-    <section id="resepi" className="py-20 bg-amber-50/40 relative overflow-hidden border-t border-b border-neutral-200">
-      {/* Background Ambience Glows */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-[#E31E24]/5 rounded-full blur-[100px] pointer-events-none" />
+    <section id="resepi" className="py-20 bg-[#0f0f12]/10 backdrop-blur-sm relative overflow-hidden border-t border-b border-white/5">
+      {/* Background Ambience (Dark Theme Retained) */}
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#E31E24]/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FDB913]/10 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header */}
+        {/* Section Header (Dark Theme Retained) */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-amber-100/80 border border-amber-300 px-4 py-1.5 rounded-full">
-            <Award className="w-4 h-4 text-[#B45309]" />
-            <span className="text-xs font-bold uppercase tracking-widest text-[#B45309]">
+          <div className="inline-flex items-center gap-2 bg-[#1d1d22] border border-[#FDB913]/30 px-4 py-1.5 rounded-full">
+            <Award className="w-4 h-4 text-[#FDB913]" />
+            <span className="text-xs font-bold uppercase tracking-widest text-[#FDB913]">
               Sentuhan Pakar Kulinari Antarabangsa
             </span>
           </div>
           
-          <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 uppercase tracking-tight">
-            RAHSIA DI SEBALIK KEHEBATAN <span className="text-[#E31E24]">HEMZAL</span>
+          <h2 className="text-3xl sm:text-5xl font-black text-white uppercase tracking-tight">
+            RAHSIA DI SEBALIK KEHEBATAN <span className="text-[#FDB913]">HEMZAL</span>
           </h2>
           
-          <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
-            Dicipta oleh <strong className="text-neutral-900">Chef Mohammad Helmi</strong>, bekas Chef Eksekutif rangkaian hotel 5-bintang dengan pengalaman kulinari lebih 15 tahun. Misi kami: membawakan ayam goreng kualiti tertinggi pada harga yang berpatutan untuk semua.
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            Dicipta oleh <strong className="text-white">Chef Mohammad Helmi</strong>, bekas Chef Eksekutif rangkaian hotel 5-bintang dengan pengalaman kulinari lebih 15 tahun. Misi kami: membawakan ayam goreng kualiti tertinggi pada harga yang berpatutan untuk semua.
           </p>
         </div>
 
-        {/* 4 Pillars Interactive Layout - Light Theme */}
+        {/* 4 Pillars Interactive Layout - Light Theme Cards Only */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left: Pillar Selection List */}
@@ -83,8 +83,8 @@ export const ChefStory: React.FC = () => {
                   }}
                   className={`w-full text-left p-5 rounded-2xl border transition-all cursor-pointer flex items-start gap-4 ${
                     isSelected
-                      ? 'bg-white border-2 border-[#FDB913] shadow-xl shadow-amber-500/10 translate-x-2'
-                      : 'bg-white/80 hover:bg-white border-neutral-200 hover:border-neutral-300 shadow-xs'
+                      ? 'bg-white border-2 border-[#FDB913] shadow-xl shadow-black/20 translate-x-2'
+                      : 'bg-white/90 hover:bg-white border-neutral-200 shadow-xs'
                   }`}
                 >
                   <div
@@ -108,10 +108,10 @@ export const ChefStory: React.FC = () => {
                         </span>
                       )}
                     </div>
-                    <h3 className={`font-black text-base sm:text-lg mt-0.5 ${isSelected ? 'text-neutral-900' : 'text-neutral-700'}`}>
+                    <h3 className={`font-black text-base sm:text-lg mt-0.5 ${isSelected ? 'text-neutral-900' : 'text-neutral-800'}`}>
                       {pillar.title}
                     </h3>
-                    <p className="text-xs text-neutral-500 mt-1 line-clamp-2">
+                    <p className="text-xs text-neutral-600 mt-1 line-clamp-2">
                       {pillar.desc}
                     </p>
                   </div>
@@ -122,10 +122,10 @@ export const ChefStory: React.FC = () => {
             })}
           </div>
 
-          {/* Right: Active Pillar Showcase Card */}
+          {/* Right: Active Pillar Showcase Card (Light Theme) */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-3xl p-8 sm:p-10 bg-white border border-neutral-200/90 shadow-2xl shadow-neutral-200/60 overflow-hidden">
-              {/* Decorative Light Watermark */}
+            <div className="relative rounded-3xl p-8 sm:p-10 bg-white border border-neutral-200/90 shadow-2xl shadow-black/30 overflow-hidden">
+              {/* Decorative Watermark */}
               <div className="absolute -bottom-10 -right-10 text-neutral-100 font-black text-9xl select-none pointer-events-none">
                 0{activePillar + 1}
               </div>
