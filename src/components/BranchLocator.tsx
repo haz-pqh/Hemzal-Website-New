@@ -44,7 +44,7 @@ export const BranchLocator: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Section Header (Maintained Dark Theme) */}
+        {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center gap-1.5 bg-[#1b1b20] border border-[#FDB913]/30 px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#FDB913]">
             <MapPin className="w-3.5 h-3.5 text-[#FDB913]" />
@@ -60,7 +60,7 @@ export const BranchLocator: React.FC = () => {
           </p>
         </div>
 
-        {/* Toolbar & Filter Tabs (Light Theme) */}
+        {/* Toolbar & Filter Tabs */}
         <div className="space-y-4 mb-10">
           
           {/* Search bar & Open Now toggle */}
@@ -73,33 +73,33 @@ export const BranchLocator: React.FC = () => {
                 value={branchSearch}
                 onChange={(e) => setBranchSearch(e.target.value)}
                 placeholder="Cari bandar, kawasan atau negeri..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-200 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#FDB913] shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#17171c] border border-white/10 rounded-xl text-sm text-white placeholder:text-neutral-500 focus:outline-none focus:border-[#FDB913]"
               />
               {branchSearch && (
                 <button
                   onClick={() => setBranchSearch('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-neutral-400 hover:text-neutral-700 font-semibold"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-neutral-400 hover:text-white"
                 >
                   Padam
                 </button>
               )}
             </div>
 
-            {/* Toggle Open Now (Light Theme) */}
+            {/* Toggle Open Now */}
             <button
               onClick={() => setOnlyOpen(!onlyOpen)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer shadow-sm ${
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 border cursor-pointer ${
                 onlyOpen
-                  ? 'bg-emerald-50 border-emerald-500 text-emerald-800'
-                  : 'bg-white border-neutral-200 text-neutral-700 hover:bg-neutral-50 hover:border-neutral-300'
+                  ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300'
+                  : 'bg-[#17171c] border-white/10 text-neutral-300 hover:border-white/20'
               }`}
             >
-              <span className={`w-2 h-2 rounded-full ${onlyOpen ? 'bg-emerald-500 animate-ping' : 'bg-neutral-400'}`} />
+              <span className={`w-2 h-2 rounded-full ${onlyOpen ? 'bg-emerald-400 animate-ping' : 'bg-neutral-500'}`} />
               <span>Tapis: Buka Sekarang Sahaja</span>
             </button>
           </div>
 
-          {/* Region Tabs (Light Theme) */}
+          {/* Region Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
             {regionTabs.map((tab) => {
               const isActive = selectedRegion === tab.id;
@@ -113,12 +113,12 @@ export const BranchLocator: React.FC = () => {
                   }}
                   className={`px-5 py-3 rounded-full font-bold text-xs sm:text-sm uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
                     isActive
-                      ? 'bg-[#E31E24] text-white shadow-lg shadow-[#E31E24]/20 border border-amber-300'
-                      : 'bg-white text-neutral-700 hover:text-neutral-900 hover:bg-neutral-50 border border-neutral-200 shadow-xs'
+                      ? 'bg-[#E31E24] text-white shadow-lg shadow-[#E31E24]/30 border border-[#FDB913]/40'
+                      : 'bg-[#18181d] text-neutral-300 hover:text-white hover:bg-[#202026] border border-white/5'
                   }`}
                 >
                   <span>{tab.label}</span>
-                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-black ${isActive ? 'bg-black/20 text-white' : 'bg-neutral-100 text-neutral-600'}`}>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full ${isActive ? 'bg-black/40 text-[#FDB913]' : 'bg-white/10 text-neutral-400'}`}>
                     {count}
                   </span>
                 </button>
@@ -128,12 +128,12 @@ export const BranchLocator: React.FC = () => {
 
         </div>
 
-        {/* Branch Cards Grid (Light Theme) */}
+        {/* Branch Cards Grid */}
         {filteredBranches.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-3xl border border-neutral-200 shadow-xl">
-            <MapPin className="w-12 h-12 text-[#E31E24] mx-auto mb-3 opacity-60" />
-            <h3 className="text-lg font-bold text-neutral-900">Tiada cawangan dijumpai</h3>
-            <p className="text-xs text-neutral-500 mt-1">Sila pilih kawasan lain atau semak ejaan carian anda.</p>
+          <div className="text-center py-16 bg-[#141418] rounded-3xl border border-white/10">
+            <MapPin className="w-12 h-12 text-[#FDB913] mx-auto mb-3 opacity-50" />
+            <h3 className="text-lg font-bold text-white">Tiada cawangan dijumpai</h3>
+            <p className="text-xs text-neutral-400 mt-1">Sila pilih kawasan lain atau semak ejaan carian anda.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -142,27 +142,27 @@ export const BranchLocator: React.FC = () => {
               return (
                 <div
                   key={branch.id}
-                  className="bg-white hover:bg-amber-50/30 rounded-3xl border border-neutral-200/90 hover:border-[#FDB913] transition-all duration-300 p-6 flex flex-col justify-between shadow-xl shadow-black/10 space-y-5 group"
+                  className="bg-[#141418] hover:bg-[#18181f] rounded-3xl border border-white/10 hover:border-[#FDB913]/40 transition-all duration-300 p-6 flex flex-col justify-between shadow-xl space-y-5 group"
                 >
                   {/* Top Bar: Name & Badges */}
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-200/80 flex items-center justify-center text-[#B45309] shrink-0 group-hover:bg-[#E31E24] group-hover:text-white transition-colors shadow-xs">
+                        <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FDB913] shrink-0 group-hover:bg-[#E31E24] group-hover:text-white transition-colors">
                           <MapPin className="w-4 h-4" />
                         </div>
                         <div>
-                          <span className="text-[10px] uppercase font-bold text-[#B45309] tracking-wider">
+                          <span className="text-[10px] uppercase font-bold text-[#FDB913] tracking-wider">
                             {branch.regionLabel}
                           </span>
-                          <h3 className="font-black text-lg text-neutral-900 leading-snug">
+                          <h3 className="font-black text-lg text-white leading-snug">
                             {branch.name}
                           </h3>
                         </div>
                       </div>
 
                       {branch.isHQ && (
-                        <span className="bg-[#E31E24] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-md shrink-0 shadow-xs">
+                        <span className="bg-[#E31E24] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-md shrink-0 shadow-md">
                           HQ Flagship
                         </span>
                       )}
@@ -173,20 +173,20 @@ export const BranchLocator: React.FC = () => {
                       <span
                         className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold text-[11px] ${
                           open
-                            ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                            : 'bg-rose-50 text-rose-700 border border-rose-200'
+                            ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                            : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
                         }`}
                       >
-                        <span className={`w-1.5 h-1.5 rounded-full ${open ? 'bg-emerald-500 animate-pulse' : 'bg-rose-500'}`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${open ? 'bg-emerald-400 animate-pulse' : 'bg-rose-400'}`} />
                         {open ? 'Buka Sekarang' : 'Tutup Buat Masa Ini'}
                       </span>
-                      <span className="text-neutral-500 flex items-center gap-1 text-[11px] font-medium">
-                        <Clock className="w-3 h-3 text-neutral-400" /> {branch.openingHours}
+                      <span className="text-neutral-400 flex items-center gap-1 text-[11px]">
+                        <Clock className="w-3 h-3 text-neutral-500" /> {branch.openingHours}
                       </span>
                     </div>
 
                     {/* Full Address */}
-                    <p className="text-xs text-neutral-600 leading-relaxed bg-neutral-50 p-3 rounded-xl border border-neutral-100">
+                    <p className="text-xs text-neutral-300 leading-relaxed bg-white/5 p-3 rounded-xl border border-white/5">
                       {branch.address}
                     </p>
 
@@ -195,7 +195,7 @@ export const BranchLocator: React.FC = () => {
                       {branch.features.map((feat) => (
                         <span
                           key={feat}
-                          className="text-[10px] font-semibold bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded-md border border-neutral-200/60"
+                          className="text-[10px] font-medium bg-[#1d1d24] text-neutral-300 px-2 py-0.5 rounded-md border border-white/5"
                         >
                           {feat}
                         </span>
@@ -204,24 +204,24 @@ export const BranchLocator: React.FC = () => {
                   </div>
 
                   {/* Action Buttons: Maps & Waze & WhatsApp */}
-                  <div className="space-y-2 pt-3 border-t border-neutral-100">
+                  <div className="space-y-2 pt-3 border-t border-white/10">
                     <div className="grid grid-cols-2 gap-2">
                       <a
                         href={branch.googleMapsUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs py-2.5 rounded-xl transition-colors"
+                        className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-2.5 rounded-xl transition-colors"
                       >
-                        <Navigation className="w-3.5 h-3.5 text-[#B45309]" />
+                        <Navigation className="w-3.5 h-3.5 text-[#FDB913]" />
                         <span>Google Maps</span>
                       </a>
                       <a
                         href={branch.wazeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-center gap-1.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-800 font-bold text-xs py-2.5 rounded-xl transition-colors"
+                        className="flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/20 text-white font-bold text-xs py-2.5 rounded-xl transition-colors"
                       >
-                        <Navigation className="w-3.5 h-3.5 text-sky-600" />
+                        <Navigation className="w-3.5 h-3.5 text-[#33ccff]" />
                         <span>Waze Nav</span>
                       </a>
                     </div>
@@ -231,7 +231,7 @@ export const BranchLocator: React.FC = () => {
                       href={`https://wa.me/${branch.whatsapp}?text=Hai%20Hemzal%20${encodeURIComponent(branch.name)},%20saya%20ingin%20membuat%20pesanan%20ayam%20goreng.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center gap-2 bg-emerald-50 hover:bg-[#25D366] text-emerald-700 hover:text-white font-black text-xs uppercase tracking-wider py-2.5 rounded-xl border border-emerald-300 transition-all cursor-pointer shadow-xs"
+                      className="w-full flex items-center justify-center gap-2 bg-[#25D366]/20 hover:bg-[#25D366] text-[#25D366] hover:text-black font-black text-xs uppercase tracking-wider py-2.5 rounded-xl border border-[#25D366]/40 transition-all cursor-pointer shadow-sm"
                     >
                       <Phone className="w-3.5 h-3.5" />
                       <span>WhatsApp Outlet Ini ({branch.phone})</span>
