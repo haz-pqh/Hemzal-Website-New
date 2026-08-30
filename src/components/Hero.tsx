@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
   return (
     <section
       id="home"
-      className="relative min-h-[92vh] pt-32 pb-16 lg:pt-40 lg:pb-24 flex items-center justify-center overflow-hidden bg-white/10 backdrop-blur-md border-b border-white/10"
+      className="relative min-h-[92vh] pt-32 pb-16 lg:pt-40 lg:pb-24 flex items-center justify-center overflow-hidden bg-neutral-50"
     >
       {/* Background Ambience Glows */}
       <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#E31E24]/10 rounded-full blur-[120px] pointer-events-none" />
@@ -57,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 bg-amber-500/15 backdrop-blur-md border border-amber-500/30 rounded-full px-4 py-1.5 shadow-sm"
+              className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-full px-4 py-1.5 shadow-sm"
             >
               <span className="flex h-2 w-2 rounded-full bg-[#E31E24] animate-ping" />
               <Award className="w-4 h-4 text-[#D97706]" />
@@ -71,9 +71,9 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight text-neutral-900 leading-[1.05] uppercase drop-shadow-sm"
+              className="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight text-neutral-900 leading-[1.05] uppercase"
             >
-              RANGUP DI <span className="text-[#D97706] drop-shadow-[0_2px_12px_rgba(217,119,6,0.25)]">LUAR</span>,
+              RANGUP DI <span className="text-[#D97706] drop-shadow-[0_2px_12px_rgba(217,119,6,0.2)]">LUAR</span>,
               <br />
               JUICY DI <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E31E24] to-[#C1121F]">DALAM.</span>
             </motion.h1>
@@ -83,7 +83,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-base sm:text-lg text-neutral-800 max-w-2xl font-medium leading-relaxed drop-shadow-sm"
+              className="text-base sm:text-lg text-neutral-600 max-w-2xl font-normal leading-relaxed"
             >
               Nikmati ayam goreng gourmet Malaysia bertaraf hotel 5-bintang. Diperap 24 jam dengan 18 rempah rahsia, disalut tepung keemasan rangup dan dihidang panas bersama sos istimewa.
             </motion.p>
@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
                 className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-black tracking-wider uppercase transition-all cursor-pointer border ${
                   crunchActive
                     ? 'bg-[#FDB913] text-neutral-950 border-[#FDB913] scale-105 shadow-md shadow-[#FDB913]/30'
-                    : 'bg-white/40 backdrop-blur-md hover:bg-white/60 text-[#B45309] border-[#FDB913]/60 hover:border-[#D97706] shadow-sm'
+                    : 'bg-white hover:bg-neutral-100 text-[#B45309] border-[#FDB913]/60 hover:border-[#D97706] shadow-sm'
                 }`}
               >
                 <Volume2 className={`w-4 h-4 ${crunchActive ? 'animate-bounce' : ''}`} />
@@ -129,7 +129,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               <button
                 id="hero-find-branch-btn"
                 onClick={onFindBranch}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/40 backdrop-blur-md hover:bg-white/60 text-neutral-800 hover:text-neutral-900 font-bold text-sm uppercase tracking-wider px-7 py-4 rounded-2xl border border-white/40 hover:border-neutral-400 transition-all cursor-pointer shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-neutral-800 hover:text-neutral-900 font-bold text-sm uppercase tracking-wider px-7 py-4 rounded-2xl border border-neutral-300 hover:border-neutral-400 transition-all cursor-pointer shadow-sm"
               >
                 <span>Cari Cawangan Terdekat</span>
               </button>
@@ -140,37 +140,37 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 w-full max-w-2xl border-t border-neutral-300/40 text-left"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 w-full max-w-2xl border-t border-neutral-200 text-left"
             >
-              <div className="flex items-center gap-2.5 bg-white/35 backdrop-blur-md p-2.5 rounded-xl border border-white/50 shadow-sm">
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
                 <ShieldCheck className="w-5 h-5 text-[#D97706] shrink-0" />
                 <div className="text-[11px]">
                   <p className="font-bold text-neutral-900">100% Halal</p>
-                  <p className="text-neutral-700">Diiktiraf JAKIM</p>
+                  <p className="text-neutral-500">Diiktiraf JAKIM</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 bg-white/35 backdrop-blur-md p-2.5 rounded-xl border border-white/50 shadow-sm">
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
                 <Clock className="w-5 h-5 text-[#E31E24] shrink-0" />
                 <div className="text-[11px]">
                   <p className="font-bold text-neutral-900">24 Jam</p>
-                  <p className="text-neutral-700">Perapan Rempah</p>
+                  <p className="text-neutral-500">Perapan Rempah</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 bg-white/35 backdrop-blur-md p-2.5 rounded-xl border border-white/50 shadow-sm">
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
                 <Sparkles className="w-5 h-5 text-[#D97706] shrink-0" />
                 <div className="text-[11px]">
                   <p className="font-bold text-neutral-900">Ayam Segar</p>
-                  <p className="text-neutral-700">Bukan Beku</p>
+                  <p className="text-neutral-500">Bukan Beku</p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 bg-white/35 backdrop-blur-md p-2.5 rounded-xl border border-white/50 shadow-sm">
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <div className="text-[11px]">
                   <p className="font-bold text-neutral-900">Saiz Mega</p>
-                  <p className="text-neutral-700">Potongan Gergasi</p>
+                  <p className="text-neutral-500">Potongan Gergasi</p>
                 </div>
               </div>
             </motion.div>
@@ -211,26 +211,26 @@ export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
               </div>
 
               {/* Floating Badge 1: 5-Star Rating */}
-              <div className="absolute -top-3 left-2 sm:-top-4 sm:-left-6 bg-white/50 backdrop-blur-md border border-white/60 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 animate-bounce duration-1000 z-30 pointer-events-none">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/20 flex items-center justify-center text-[#D97706] shrink-0">
+              <div className="absolute -top-3 left-2 sm:-top-4 sm:-left-6 bg-white/95 backdrop-blur-md border border-neutral-200/90 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 animate-bounce duration-1000 z-30 pointer-events-none">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-[#D97706] shrink-0">
                   <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-[#D97706]" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1">
                     <span className="font-black text-xs sm:text-sm text-neutral-900">4.9 / 5.0</span>
                   </div>
-                  <p className="text-[9px] sm:text-[10px] text-neutral-700 font-medium">12,000+ Review</p>
+                  <p className="text-[9px] sm:text-[10px] text-neutral-500">12,000+ Review</p>
                 </div>
               </div>
 
               {/* Floating Badge 2: Mega Portion */}
-              <div className="absolute -bottom-3 right-2 sm:-bottom-4 sm:-right-6 bg-white/50 backdrop-blur-md border border-white/60 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 z-30 pointer-events-none">
-                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#E31E24]/20 flex items-center justify-center text-[#E31E24] shrink-0">
+              <div className="absolute -bottom-3 right-2 sm:-bottom-4 sm:-right-6 bg-white/95 backdrop-blur-md border border-neutral-200/90 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 z-30 pointer-events-none">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#E31E24]/10 flex items-center justify-center text-[#E31E24] shrink-0">
                   <Flame className="w-4 h-4 sm:w-5 sm:h-5 fill-[#E31E24]" />
                 </div>
                 <div>
                   <p className="font-black text-[11px] sm:text-xs text-neutral-900 uppercase tracking-wider">Potongan Mega</p>
-                  <p className="text-[9px] sm:text-[10px] text-[#B45309] font-medium">Extra Rangup & Berjus</p>
+                  <p className="text-[9px] sm:text-[10px] text-[#B45309]">Extra Rangup & Berjus</p>
                 </div>
               </div>
 
