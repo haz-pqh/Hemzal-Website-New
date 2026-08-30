@@ -46,11 +46,14 @@ export const CateringFranchiseModal: React.FC<CateringFranchiseModalProps> = ({
   const handleSendWhatsApp = () => {
     playPopSound();
     confetti({ particleCount: 70, spread: 50 });
-    const text = activeTab === 'catering'
-      ? `Hai Hemzal Catering! Saya ingin tempah katering untuk ${paxCount} Pax (${currentPackage.name}). Anggaran RM ${estimatedTotal.toFixed(2)}. Kandungan: ${currentPackage.description}. Boleh bantu saya?`
-      : `Hai Hemzal HQ! Saya berminat untuk memohon peluang perkongsian Francais Cawangan Hemzal Crispy Chicken. Mohon maklumat lanjut.`;
-    
-    window.open(`https://wa.me/60164175976?text=${encodeURIComponent(text)}`, '_blank');
+    if(activeTab === 'catering'){
+      const text = `Hai Hemzal Catering! Saya ingin tempah katering untuk ${paxCount} Pax (${currentPackage.name}). Anggaran RM ${estimatedTotal.toFixed(2)}. Kandungan: ${currentPackage.description}. Boleh bantu saya?`;
+      
+      window.open(`https://wa.me/601121992135?text=${encodeURIComponent(text)}`, '_blank');
+    }else{
+      const text = `Hai Hemzal HQ! Saya berminat untuk memohon peluang perkongsian Francais Cawangan Hemzal Crispy Chicken. Mohon maklumat lanjut.`;
+      window.open(`https://wa.me/60122742334?text=${encodeURIComponent(text)}`, '_blank');
+    }
   };
 
   return (
