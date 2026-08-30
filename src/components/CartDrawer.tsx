@@ -139,7 +139,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     msg += `----------------------------------------\n`;
     msg += `Mohon sahkan pesanan dan sediakan hidangan panas. Terima kasih! 🙏`;
 
-    const targetPhone = '60164175976';
+    const targetPhone = '601121992135';
     const waUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`;
     setGeneratedWaUrl(waUrl);
 
