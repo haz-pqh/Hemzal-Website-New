@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CartItem, PromoVoucher } from '../types';
 import { BRANCHES } from '../data/branchData';
 import { VOUCHERS } from '../data/menuData';
-import { X, Trash2, Plus, Minus, ShoppingBag, Tag, Check, Sparkles, MapPin, Truck, Store, MessageSquare, ExternalLink } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ShoppingBag, Tag, Check, Sparkles, MapPin, Truck, Store, MessageSquare, ExternalLink, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { OrderProcessingAnimation } from './OrderProcessingAnimation';
 import { playPopSound, playCrunchSound } from '../utils/sound';
@@ -32,6 +32,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   const [voucherCodeInput, setVoucherCodeInput] = useState<string>('');
   const [appliedVoucher, setAppliedVoucher] = useState<PromoVoucher | null>(null);
   const [voucherError, setVoucherError] = useState<string>('');
+  const [formError, setFormError] = useState<string>('');
 
   // Lottie checkout loading state
   const [isCheckingOut, setIsCheckingOut] = useState<boolean>(false);
@@ -74,6 +75,24 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
   const handleCheckoutWhatsApp = () => {
     if (cart.length === 0) return;
+    setFormError('');
+
+    // Validation rules for direct checkout info
+    if (!customerName.trim()) {
+      setFormError('Sila isi Nama Penuh anda.');
+      return;
+    }
+
+    if (!customerPhone.trim()) {
+      setFormError('Sila isi Nombor Telefon anda.');
+      return;
+    }
+
+    if (orderType === 'delivery' && !deliveryAddress.trim()) {
+      setFormError('Sila isi Alamat Penghantaran lengkap.');
+      return;
+    }
+
     playCrunchSound();
     confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 
@@ -81,12 +100,12 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
     let msg = `🍗 *PESANAN HEMZAL CRISPY CHICKEN*\n`;
     msg += `----------------------------------------\n`;
-    msg += `👤 *Nama Pelanggan:* ${customerName.trim() || 'Pelanggan Online'}\n`;
-    msg += `📞 *Telefon:* ${customerPhone.trim() || 'N/A'}\n`;
+    msg += `👤 *Nama Pelanggan:* ${customerName.trim()}\n`;
+    msg += `📞 *Telefon:* ${customerPhone.trim()}\n`;
     msg += `📌 *Jenis Pesanan:* ${orderType === 'delivery' ? 'Penghantaran (Grab / Lalamove Delivery)' : `Ambil Sendiri di Outlet (${selectedBranch.name})`}\n`;
     
     if (orderType === 'delivery') {
-      msg += `🏠 *Alamat Hantar:* ${deliveryAddress.trim() || 'Sila tanya lokasi GPS'}\n`;
+      msg += `🏠 *Alamat Hantar:* ${deliveryAddress.trim()}\n`;
       msg += `🛵 *Kaedah Penghantaran:* Grab Express / Lalamove (Kadar Semasa)\n`;
     }
 
@@ -206,6 +225,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               onClick={() => {
                 playPopSound();
                 setOrderType('delivery');
+                if (formError) setFormError('');
               }}
               className={`py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'delivery'
@@ -222,6 +242,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               onClick={() => {
                 playPopSound();
                 setOrderType('pickup');
+                if (formError) setFormError('');
               }}
               className={`py-2.5 px-3 rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer ${
                 orderType === 'pickup'
@@ -256,7 +277,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="space-y-2 bg-white p-3.5 rounded-2xl border border-neutral-200/80 shadow-xs">
               <div className="flex items-center justify-between">
                 <label className="text-xs font-black text-[#B45309] uppercase flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-[#B45309]" /> Alamat Penghantaran:
+                  <MapPin className="w-3.5 h-3.5 text-[#B45309]" /> Alamat Penghantaran <span className="text-[#E31E24]">*</span>
                 </label>
                 <span className="text-[10px] text-[#B45309] bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full font-bold">
                   Kadar Grab / Lalamove
@@ -265,9 +286,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <input
                 type="text"
                 value={deliveryAddress}
-                onChange={(e) => setDeliveryAddress(e.target.value)}
+                onChange={(e) => {
+                  setDeliveryAddress(e.target.value);
+                  if (formError) setFormError('');
+                }}
                 placeholder="No rumah, jalan, taman, poskod bandar..."
-                className="w-full px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] focus:bg-white transition-colors"
+                className={`w-full px-3 py-2 bg-neutral-50 border rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] focus:bg-white transition-colors ${
+                  formError && orderType === 'delivery' && !deliveryAddress.trim()
+                    ? 'border-[#E31E24] ring-1 ring-[#E31E24] bg-red-50/20'
+                    : 'border-neutral-300'
+                }`}
               />
               <div className="flex items-center gap-1.5 text-[10px] text-neutral-600 bg-amber-500/10 p-2 rounded-lg border border-amber-500/20">
                 <Truck className="w-3.5 h-3.5 text-[#B45309] shrink-0" />
@@ -278,20 +306,44 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Customer Name & Phone */}
           <div className="grid grid-cols-2 gap-2">
-            <input
-              type="text"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              placeholder="Nama anda..."
-              className="px-3 py-2 bg-white border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs"
-            />
-            <input
-              type="tel"
-              value={customerPhone}
-              onChange={(e) => setCustomerPhone(e.target.value)}
-              placeholder="No telefon (cth: 012...)"
-              className="px-3 py-2 bg-white border border-neutral-300 rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs"
-            />
+            <div>
+              <label className="text-[10px] font-extrabold text-neutral-700 uppercase mb-1 block">
+                Nama Penuh <span className="text-[#E31E24]">*</span>
+              </label>
+              <input
+                type="text"
+                value={customerName}
+                onChange={(e) => {
+                  setCustomerName(e.target.value);
+                  if (formError) setFormError('');
+                }}
+                placeholder="Nama anda..."
+                className={`w-full px-3 py-2 bg-white border rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs ${
+                  formError && !customerName.trim()
+                    ? 'border-[#E31E24] ring-1 ring-[#E31E24] bg-red-50/20'
+                    : 'border-neutral-300'
+                }`}
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-extrabold text-neutral-700 uppercase mb-1 block">
+                No Telefon <span className="text-[#E31E24]">*</span>
+              </label>
+              <input
+                type="tel"
+                value={customerPhone}
+                onChange={(e) => {
+                  setCustomerPhone(e.target.value);
+                  if (formError) setFormError('');
+                }}
+                placeholder="No telefon (cth: 012...)"
+                className={`w-full px-3 py-2 bg-white border rounded-xl text-xs text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] shadow-xs ${
+                  formError && !customerPhone.trim()
+                    ? 'border-[#E31E24] ring-1 ring-[#E31E24] bg-red-50/20'
+                    : 'border-neutral-300'
+                }`}
+              />
+            </div>
           </div>
 
           {/* Cart Item List */}
@@ -468,6 +520,14 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <span className="text-2xl font-black text-[#B45309]">RM {foodTotal.toFixed(2)}</span>
               </div>
             </div>
+
+            {/* Validation Error Message */}
+            {formError && (
+              <div className="flex items-center gap-2 p-3 bg-red-50 border border-[#E31E24]/30 text-[#E31E24] rounded-xl text-xs font-black animate-shake">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{formError}</span>
+              </div>
+            )}
 
             {/* WhatsApp Checkout Button in #FDB913 */}
             <button
