@@ -46,21 +46,21 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
   };
 
   return (
-    <section id="menu" className="py-20 bg-white/40 backdrop-blur-md border-b border-white/20 relative overflow-hidden">
-      {/* Subtle Glows */}
+    <section id="menu" className="py-20 bg-neutral-50 border-b border-neutral-200/80 relative overflow-hidden">
+      {/* Ambient Red/Gold Glows */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[radial-gradient(ellipse_at_center,rgba(227,30,36,0.06),transparent_70%)] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-2 bg-amber-500/15 backdrop-blur-md border border-amber-500/30 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#B45309]">
+          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#B45309]">
             <Flame className="w-3.5 h-3.5 fill-[#E31E24] text-[#E31E24]" />
             <span>Pilihan Gourmet Rasmi Hemzal</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 uppercase tracking-tight">
-            MENU & <span className="text-[#D97706] drop-shadow-[0_2px_10px_rgba(217,119,6,0.2)]">SENARAI HARGA</span>
+            MENU & <span className="text-[#D97706] drop-shadow-[0_2px_10px_rgba(217,119,6,0.15)]">SENARAI HARGA</span>
           </h2>
 
           <p className="text-neutral-700 text-sm sm:text-base font-medium">
@@ -69,22 +69,22 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
           {/* Pricing Structure Highlight Bar */}
           <div className="pt-2 grid grid-cols-2 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto text-left">
-            <div className="bg-white/60 backdrop-blur-md border border-white/80 p-3 rounded-2xl shadow-sm">
+            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
               <span className="text-[10px] text-neutral-500 uppercase font-black block">Kadar Asas Ayam</span>
               <strong className="text-sm font-black text-[#D97706] block">RM 4.50 / Ketul</strong>
               <span className="text-[10px] text-neutral-600">Kustom sebarang kuantiti</span>
             </div>
-            <div className="bg-emerald-500/10 backdrop-blur-md border border-emerald-500/30 p-3 rounded-2xl shadow-sm">
-              <span className="text-[10px] text-emerald-700 uppercase font-black block">Sos Cili</span>
-              <strong className="text-sm font-black text-emerald-800 block">PERCUMA (RM 0.00)</strong>
-              <span className="text-[10px] text-emerald-700/90 font-medium">Disertakan setiap set</span>
+            <div className="bg-emerald-500/10 border border-emerald-500/25 p-3 rounded-2xl shadow-sm">
+              <span className="text-[10px] text-emerald-800 uppercase font-black block">Sos Cili</span>
+              <strong className="text-sm font-black text-emerald-700 block">PERCUMA (RM 0.00)</strong>
+              <span className="text-[10px] text-emerald-800/90 font-medium">Disertakan setiap set</span>
             </div>
-            <div className="bg-white/60 backdrop-blur-md border border-white/80 p-3 rounded-2xl shadow-sm">
+            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
               <span className="text-[10px] text-neutral-500 uppercase font-black block">Sos Keju / Garlic / Korean</span>
               <strong className="text-sm font-black text-[#D97706] block">RM 2.00 / Cup</strong>
               <span className="text-[10px] text-neutral-600">Sos gourmet signature</span>
             </div>
-            <div className="bg-white/60 backdrop-blur-md border border-white/80 p-3 rounded-2xl shadow-sm">
+            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
               <span className="text-[10px] text-neutral-500 uppercase font-black block">Sos Furikake / Togarashi</span>
               <strong className="text-sm font-black text-[#D97706] block">RM 3.00 / Cup</strong>
               <span className="text-[10px] text-neutral-600">Sos import Jepun eksklusif</span>
@@ -94,8 +94,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
         {/* FEATURED PROMO BANNER: HEMZAL SPECIAL BUCKET */}
         {specialBucketItem && (
-          <div className="mb-12 bg-gradient-to-r from-[#E31E24] via-[#cc141a] to-[#990D11] rounded-3xl p-6 sm:p-8 border border-[#FDB913]/40 shadow-2xl relative overflow-hidden">
-            {/* Background badge */}
+          <div className="mb-12 bg-gradient-to-r from-[#E31E24] via-[#cc141a] to-[#990D11] rounded-3xl p-6 sm:p-8 border border-[#FDB913]/40 shadow-xl relative overflow-hidden">
             <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-[#FDB913]/20 rounded-full blur-2xl pointer-events-none" />
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
@@ -210,7 +209,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Cari Original, Cheese, Garlic, Habanero..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white/70 backdrop-blur-md border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-500 focus:outline-none focus:border-[#D97706] transition-colors shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] transition-colors shadow-sm"
               />
               {searchQuery && (
                 <button
@@ -223,10 +222,10 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
             </div>
 
             {/* Original Crispy Recipe Guarantee Pill */}
-            <div className="inline-flex items-center gap-2 bg-white/50 backdrop-blur-md border border-[#FDB913]/40 px-3.5 py-1.5 rounded-xl text-xs text-neutral-700 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#FDB913]/40 px-3.5 py-1.5 rounded-xl text-xs text-neutral-700 shadow-sm">
               <ShieldCheck className="w-4 h-4 text-[#D97706] shrink-0" />
               <span className="text-neutral-900 font-bold">100% Resepi Original Crispy</span>
-              <span className="text-neutral-400">•</span>
+              <span className="text-neutral-300">•</span>
               <span className="text-neutral-600 text-[11px]">Kepedasan & rasa dipilih melalui sos signature</span>
             </div>
 
@@ -245,14 +244,14 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                   }}
                   className={`px-5 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
                     isActive
-                      ? 'bg-gradient-to-r from-[#E31E24] to-[#C1121F] text-white shadow-lg shadow-[#E31E24]/25 border border-[#FDB913]/30 scale-102'
-                      : 'bg-white/60 backdrop-blur-md text-neutral-700 hover:text-neutral-900 hover:bg-white/90 border border-neutral-200/80 shadow-sm'
+                      ? 'bg-gradient-to-r from-[#E31E24] to-[#C1121F] text-white shadow-lg shadow-[#E31E24]/20 border border-[#FDB913]/30 scale-102'
+                      : 'bg-white text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 border border-neutral-200 shadow-sm'
                   }`}
                 >
                   <span>{cat.label}</span>
                   <span
                     className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isActive ? 'bg-black/30 text-[#FDB913]' : 'bg-neutral-200/80 text-neutral-600 font-bold'
+                      isActive ? 'bg-black/30 text-[#FDB913]' : 'bg-neutral-100 text-neutral-600 font-bold border border-neutral-200'
                     }`}
                   >
                     {cat.count}
@@ -266,7 +265,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
 
         {/* Menu Items Grid */}
         {filteredItems.length === 0 ? (
-          <div className="text-center py-16 bg-white/60 backdrop-blur-md rounded-3xl border border-neutral-200/80 shadow-sm">
+          <div className="text-center py-16 bg-white rounded-3xl border border-neutral-200 shadow-sm">
             <Flame className="w-12 h-12 text-[#E31E24] mx-auto mb-3 opacity-50" />
             <h3 className="text-lg font-bold text-neutral-900">Tiada item dijumpai</h3>
             <p className="text-xs text-neutral-600 mt-1">Cuba tukar carian atau pilih kategori lain.</p>
@@ -289,7 +288,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
               return (
                 <div
                   key={item.id}
-                  className="group bg-white/70 backdrop-blur-md hover:bg-white/90 rounded-3xl border border-white/80 hover:border-[#D97706]/40 transition-all duration-300 overflow-hidden flex flex-col shadow-lg hover:shadow-2xl"
+                  className="group bg-white hover:bg-neutral-50/50 rounded-3xl border border-neutral-200/80 hover:border-[#D97706]/40 transition-all duration-300 overflow-hidden flex flex-col shadow-sm hover:shadow-xl"
                 >
                   {/* Image & Badges */}
                   <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
@@ -364,7 +363,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                                 className={`py-1.5 px-2 rounded-xl text-center border transition-all cursor-pointer ${
                                   isSelected
                                     ? 'bg-[#E31E24] border-[#E31E24] text-white shadow-md font-black'
-                                    : 'bg-white/80 border-neutral-200 text-neutral-600 hover:text-neutral-900 hover:border-neutral-300 font-medium'
+                                    : 'bg-neutral-100 border-neutral-200 text-neutral-700 hover:text-neutral-900 hover:border-neutral-300 font-medium'
                                 }`}
                               >
                                 <span className="text-[11px] block">{portion.label}</span>
@@ -379,7 +378,7 @@ export const MenuSection: React.FC<MenuSectionProps> = ({
                     )}
 
                     {/* Price & Action Buttons */}
-                    <div className="pt-3 border-t border-neutral-200/60 flex items-center justify-between gap-2">
+                    <div className="pt-3 border-t border-neutral-200/80 flex items-center justify-between gap-2">
                       <div>
                         <span className="text-[10px] text-neutral-500 block uppercase font-bold">
                           {activePortion ? activePortion.label : 'Harga'}
