@@ -130,7 +130,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenFranchise }) => {
 
             <div className="pt-2 text-[11px] text-neutral-400 space-y-1">
               <p className="flex items-center gap-1.5">
-                <Phone className="w-3.5 h-3.5 text-[#FDB913]" /> Hotline & WhatsApp: +60 16-417 5976
+                <Phone className="w-3.5 h-3.5 text-[#FDB913]" /> Hotline & WhatsApp: +60 11-2199 2135
               </p>
               <p className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-[#FDB913]" /> hello@hemzalcrispychicken.com
