@@ -347,7 +347,7 @@ export const MENU_ITEMS: MenuItem[] = [
     price: 53.90,
     originalPrice: 57.00,
     category: 'combos',
-    image: '/bucket.png',
+    image: '/bucketSpecial.png',
     isBestSeller: true,
     isChefSpecial: true,
     spiceLevel: 2,
