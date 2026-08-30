@@ -49,7 +49,7 @@ export const ChefStory: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header (Dark Theme Retained) */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4" data-aos="fade-up">
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 bg-[#1d1d22] border border-[#FDB913]/30 px-4 py-1.5 rounded-full">
             <Award className="w-4 h-4 text-[#FDB913]" />
             <span className="text-xs font-bold uppercase tracking-widest text-[#FDB913]">
