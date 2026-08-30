@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  ShoppingBag, 
   MapPin, 
   Phone, 
   Menu, 
@@ -17,14 +16,10 @@ import { playPopSound } from '../utils/sound';
 import logo from '/icon.png';
 
 interface NavbarProps {
-  cartCount: number;
-  onOpenCart: () => void;
   onOpenFranchise: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  cartCount,
-  onOpenCart,
   onOpenFranchise,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,8 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll); return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
@@ -116,28 +110,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <Award className="w-4 h-4 text-[#E31E24]" />
               <span>Katering / Francais</span>
-            </button>
-
-            {/* Shopping Cart Button */}
-            <button
-              id="cart-trigger-btn"
-              onClick={() => {
-                playPopSound();
-                onOpenCart();
-              }}
-              className="relative flex items-center justify-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white px-4 py-2.5 rounded-xl transition-all shadow-md cursor-pointer group shrink-0"
-              aria-label="Buka Troli Pesanan"
-            >
-              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-[#FDB913] group-hover:scale-110 transition-transform shrink-0" />
-              <span className="text-xs font-bold hidden sm:inline">Troli</span>
-              
-              {cartCount > 0 ? (
-                <span className="bg-[#E31E24] text-white text-[11px] font-black min-w-[20px] h-5 px-1.5 rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                  {cartCount}
-                </span>
-              ) : (
-                <span className="hidden xl:inline text-[11px] text-neutral-400 font-medium">(0)</span>
-              )}
             </button>
 
             {/* Direct Order CTA Button */}
