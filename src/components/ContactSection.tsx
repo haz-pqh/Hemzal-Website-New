@@ -190,7 +190,7 @@ export const ContactSection: React.FC = () => {
               href="https://wa.me/601121992135?text=Hai%20Hemzal%20Crispy%20Chicken,%20saya%20ada%20pertanyaan."
               target="_blank"
               rel="noopener noreferrer"
-              className="p-6 rounded-3xl bg-white hover:bg-emerald-50/40 border border-neutral-200/90 hover:border-[#25D366] transition-all duration-300 flex items-center gap-4 group block shadow-xl shadow-black/10"
+              className="p-6 rounded-3xl bg-white hover:bg-[#fdb913]/10 border border-neutral-200/90 hover:border-[#fdb913] transition-all duration-300 flex items-center gap-4 group block shadow-xl shadow-black/10"
             >
               <div className="w-14 h-14 rounded-2xl bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-[#25D366] group-hover:scale-110 transition-transform shrink-0 shadow-xs">
                 <MessageSquare className="w-7 h-7" />
