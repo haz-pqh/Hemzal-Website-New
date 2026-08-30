@@ -1,432 +1,244 @@
-import React, { useState, useMemo } from 'react';
-import { MenuItem, PortionOption } from '../types';
-import { Flame, Star, Search, Plus, Sparkles, Filter, Check, ShoppingBag, Eye, Award, Layers, ShieldCheck } from 'lucide-react';
-import { playPopSound } from '../utils/sound';
+import React, { useState, useRef, useEffect } from 'react';
+import { Flame, Star, Volume2, ShieldCheck, Award, ArrowRight, Sparkles, Clock, CheckCircle2 } from 'lucide-react';
+import { motion } from 'motion/react';
+import { playCrunchSound } from '../utils/sound';
+import promoVid from '/hemzal-promo-vid.mp4';
+import promoPic from '/hemzal-promo-pic.png';
 
-interface MenuSectionProps {
-  items: MenuItem[];
-  onSelectItem: (item: MenuItem, initialPortion?: PortionOption) => void;
-  onQuickAdd: (item: MenuItem, initialPortion?: PortionOption) => void;
+interface HeroProps {
+  onExploreMenu: () => void;
+  onFindBranch: () => void;
 }
 
-export const MenuSection: React.FC<MenuSectionProps> = ({
-  items,
-  onSelectItem,
-  onQuickAdd,
-}) => {
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [searchQuery, setSearchQuery] = useState<string>('');
+export const Hero: React.FC<HeroProps> = ({ onExploreMenu, onFindBranch }) => {
+  const [crunchActive, setCrunchActive] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Track selected portion preview for cards
-  const [cardPortions, setCardPortions] = useState<Record<string, PortionOption>>({});
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          console.log('Autoplay prevented or waiting for interaction:', err);
+        });
+      }
+    }
+  }, []);
 
-  const categories = [
-    { id: 'all', label: 'Semua Menu', count: items.length },
-    { id: 'signature', label: 'Set Ayam Crispy (Kustom Ketul)', count: items.filter(i => i.category === 'signature').length },
-    { id: 'combos', label: 'Special Bucket Promo', count: items.filter(i => i.category === 'combos').length },
-    { id: 'sides', label: 'Coleslaw Istimewa', count: items.filter(i => i.category === 'sides').length },
-  ];
-
-  const filteredItems = useMemo(() => {
-    return items.filter((item) => {
-      const matchesCategory = activeCategory === 'all' || item.category === activeCategory;
-      const matchesSearch =
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
-  }, [items, activeCategory, searchQuery]);
-
-  const specialBucketItem = items.find((i) => i.id === 'hemzal-special-bucket');
-
-  const handlePortionSelect = (itemId: string, portion: PortionOption) => {
-    playPopSound();
-    setCardPortions((prev) => ({ ...prev, [itemId]: portion }));
+  const handleCrunchClick = () => {
+    playCrunchSound();
+    setCrunchActive(true);
+    setTimeout(() => setCrunchActive(false), 800);
   };
 
   return (
-    <section id="menu" className="py-20 bg-neutral-50 border-b border-neutral-200/80 relative overflow-hidden">
-      {/* Ambient Red/Gold Glows */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-[radial-gradient(ellipse_at_center,rgba(227,30,36,0.06),transparent_70%)] pointer-events-none" />
+    <section
+      id="home"
+      className="relative min-h-[92vh] pt-32 pb-16 lg:pt-40 lg:pb-24 flex items-center justify-center overflow-hidden bg-neutral-50"
+    >
+      {/* Background Ambience Glows */}
+      <div className="absolute top-1/4 -left-40 w-96 h-96 bg-[#E31E24]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-10 right-0 w-[30rem] h-[30rem] bg-[#FDB913]/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full bg-[radial-gradient(ellipse_at_center,rgba(227,30,36,0.04),transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
-          <div className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/20 px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#B45309]">
-            <Flame className="w-3.5 h-3.5 fill-[#E31E24] text-[#E31E24]" />
-            <span>Pilihan Gourmet Rasmi Hemzal</span>
-          </div>
+      {/* Subtle Light Pattern Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none" />
 
-          <h2 className="text-3xl sm:text-5xl font-black text-neutral-900 uppercase tracking-tight">
-            MENU & <span className="text-[#D97706] drop-shadow-[0_2px_10px_rgba(217,119,6,0.15)]">SENARAI HARGA</span>
-          </h2>
-
-          <p className="text-neutral-700 text-sm sm:text-base font-medium">
-            <span className="text-[#B45309] font-bold">"Rangup di luar, Juicy di dalam!"</span> — Ayam segar diperap harian dengan resepi eksklusif dan dihidang panas mengikut tempahan anda.
-          </p>
-
-          {/* Pricing Structure Highlight Bar */}
-          <div className="pt-2 grid grid-cols-2 md:grid-cols-4 gap-2.5 max-w-4xl mx-auto text-left">
-            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
-              <span className="text-[10px] text-neutral-500 uppercase font-black block">Kadar Asas Ayam</span>
-              <strong className="text-sm font-black text-[#D97706] block">RM 4.50 / Ketul</strong>
-              <span className="text-[10px] text-neutral-600">Kustom sebarang kuantiti</span>
-            </div>
-            <div className="bg-emerald-500/10 border border-emerald-500/25 p-3 rounded-2xl shadow-sm">
-              <span className="text-[10px] text-emerald-800 uppercase font-black block">Sos Cili</span>
-              <strong className="text-sm font-black text-emerald-700 block">PERCUMA (RM 0.00)</strong>
-              <span className="text-[10px] text-emerald-800/90 font-medium">Disertakan setiap set</span>
-            </div>
-            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
-              <span className="text-[10px] text-neutral-500 uppercase font-black block">Sos Keju / Garlic / Korean</span>
-              <strong className="text-sm font-black text-[#D97706] block">RM 2.00 / Cup</strong>
-              <span className="text-[10px] text-neutral-600">Sos gourmet signature</span>
-            </div>
-            <div className="bg-white border border-neutral-200 p-3 rounded-2xl shadow-sm">
-              <span className="text-[10px] text-neutral-500 uppercase font-black block">Sos Furikake / Togarashi</span>
-              <strong className="text-sm font-black text-[#D97706] block">RM 3.00 / Cup</strong>
-              <span className="text-[10px] text-neutral-600">Sos import Jepun eksklusif</span>
-            </div>
-          </div>
-        </div>
-
-        {/* FEATURED PROMO BANNER: HEMZAL SPECIAL BUCKET */}
-        {specialBucketItem && (
-          <div className="mb-12 bg-gradient-to-r from-[#E31E24] via-[#cc141a] to-[#990D11] rounded-3xl p-6 sm:p-8 border border-[#FDB913]/40 shadow-xl relative overflow-hidden">
-            <div className="absolute -right-10 -bottom-10 w-72 h-72 bg-[#FDB913]/20 rounded-full blur-2xl pointer-events-none" />
-            
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-              
-              {/* Image & Price Ribbon */}
-              <div className="lg:col-span-5 relative rounded-2xl overflow-hidden shadow-2xl h-64 sm:h-72 bg-neutral-900 border border-white/30 group">
-                <img
-                  src={specialBucketItem.image}
-                  alt={specialBucketItem.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30" />
-                
-                {/* Official Slogan Badge */}
-                <div className="absolute top-3 left-3 bg-white text-black font-black text-[11px] px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
-                  <Flame className="w-3 h-3 text-[#E31E24] fill-[#E31E24]" />
-                  <span>Rangup di luar, Juicy di dalam!</span>
-                </div>
-
-                {/* Price Tag Box */}
-                <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md border border-[#FDB913]/60 px-3.5 py-1.5 rounded-xl text-right">
-                  <span className="text-[10px] text-neutral-300 line-through block leading-none">
-                    Harga Asal RM 57.00
-                  </span>
-                  <span className="text-xl sm:text-2xl font-black text-[#FDB913] leading-tight">
-                    RM 53.90
-                  </span>
-                  <span className="text-[9px] text-emerald-400 font-bold block">Jimat RM 3.10!</span>
-                </div>
-              </div>
-
-              {/* Offer Details */}
-              <div className="lg:col-span-7 space-y-4 text-white">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className="bg-[#FDB913] text-black font-black text-xs uppercase px-3 py-1 rounded-full shadow">
-                    🔥 Tawaran Istimewa Pembukaan
-                  </span>
-                  <span className="bg-black/30 backdrop-blur-md text-[#FDB913] font-semibold text-xs px-3 py-1 rounded-full border border-white/20">
-                    www.hemzalcrispychicken.com
-                  </span>
-                </div>
-
-                <div>
-                  <h3 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-white flex items-center gap-2">
-                    <span>HEMZAL SPECIAL BUCKET</span>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-neutral-100 mt-1 leading-relaxed">
-                    Pakej hidangan pesta lengkap terlaris! Nikmati 10 ketul ayam rangup berjus bersama 10 pek sos cili serta LENGKAP dengan 5 cawan sos gourmet istimewa:
-                  </p>
-                </div>
-
-                {/* Included 5 gourmet sauce cups breakdown */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
-                    <span className="font-semibold text-neutral-100">10 pcs Ayam Crispy</span>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-400 shrink-0" />
-                    <span className="font-semibold text-neutral-100">10 pcs Chili Sauce</span>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#FDB913] shrink-0" />
-                    <span className="font-semibold text-neutral-100">1 cup Garlic Sauce</span>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 shrink-0" />
-                    <span className="font-semibold text-neutral-100">1 cup Cheese Sauce</span>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-rose-400 shrink-0" />
-                    <span className="font-semibold text-neutral-100">1 cup Korean Habanero</span>
-                  </div>
-                  <div className="bg-black/40 backdrop-blur-md border border-white/15 p-2 rounded-xl flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-teal-300 shrink-0" />
-                    <span className="font-semibold text-neutral-100">1 cup Furikake & Togarashi</span>
-                  </div>
-                </div>
-
-                {/* Action CTA */}
-                <div className="flex flex-wrap items-center gap-3 pt-1">
-                  <button
-                    onClick={() => {
-                      playPopSound();
-                      onQuickAdd(specialBucketItem);
-                    }}
-                    className="px-6 py-3 bg-[#FDB913] hover:bg-yellow-400 text-black font-black text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-xl flex items-center gap-2 transition-all cursor-pointer"
-                  >
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Pesan Special Bucket • RM 53.90</span>
-                  </button>
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-        )}
-
-        {/* Filters & Search Toolbar */}
-        <div className="space-y-4 mb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
-          {/* Search bar & Quality Assurance Badge */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+          {/* Left Column: Hero Copy */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
             
-            {/* Search Input */}
-            <div className="relative w-full sm:w-80">
-              <Search className="w-4 h-4 text-neutral-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-              <input
-                id="menu-search-input"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Cari Original, Cheese, Garlic, Habanero..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-neutral-300/80 rounded-xl text-sm text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-[#D97706] transition-colors shadow-sm"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-neutral-400 hover:text-neutral-700 font-bold"
-                >
-                  Padam
-                </button>
-              )}
-            </div>
+            {/* Top Eyebrow Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 rounded-full px-4 py-1.5 shadow-sm"
+            >
+              <span className="flex h-2 w-2 rounded-full bg-[#E31E24] animate-ping" />
+              <Award className="w-4 h-4 text-[#D97706]" />
+              <span className="text-xs font-bold uppercase tracking-widest text-[#B45309]">
+                Resepi Eksklusif Chef Mohammad Helmi
+              </span>
+            </motion.div>
 
-            {/* Original Crispy Recipe Guarantee Pill */}
-            <div className="inline-flex items-center gap-2 bg-white border border-[#FDB913]/40 px-3.5 py-1.5 rounded-xl text-xs text-neutral-700 shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-[#D97706] shrink-0" />
-              <span className="text-neutral-900 font-bold">100% Resepi Original Crispy</span>
-              <span className="text-neutral-300">•</span>
-              <span className="text-neutral-600 text-[11px]">Kepedasan & rasa dipilih melalui sos signature</span>
-            </div>
+            {/* Main Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl sm:text-6xl xl:text-7xl font-black tracking-tight text-neutral-900 leading-[1.05] uppercase"
+            >
+              RANGUP DI <span className="text-[#D97706] drop-shadow-[0_2px_12px_rgba(217,119,6,0.2)]">LUAR</span>,
+              <br />
+              JUICY DI <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E31E24] to-[#C1121F]">DALAM.</span>
+            </motion.h1>
+
+            {/* Subheading */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="text-base sm:text-lg text-neutral-600 max-w-2xl font-normal leading-relaxed"
+            >
+              Nikmati ayam goreng gourmet Malaysia bertaraf hotel 5-bintang. Diperap 24 jam dengan 18 rempah rahsia, disalut tepung keemasan rangup dan dihidang panas bersama sos istimewa.
+            </motion.p>
+
+            {/* Interactive Crunch Audio Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="pt-1"
+            >
+              <button
+                id="hero-crunch-test-btn"
+                onClick={handleCrunchClick}
+                className={`inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-black tracking-wider uppercase transition-all cursor-pointer border ${
+                  crunchActive
+                    ? 'bg-[#FDB913] text-neutral-950 border-[#FDB913] scale-105 shadow-md shadow-[#FDB913]/30'
+                    : 'bg-white hover:bg-neutral-100 text-[#B45309] border-[#FDB913]/60 hover:border-[#D97706] shadow-sm'
+                }`}
+              >
+                <Volume2 className={`w-4 h-4 ${crunchActive ? 'animate-bounce' : ''}`} />
+                <span>{crunchActive ? '💥 KRUP KRAP! RANGUP PADU!' : '🔊 Dengar Bunyi Kerangupan'}</span>
+              </button>
+            </motion.div>
+
+            {/* Primary Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-center gap-4 pt-2 w-full sm:w-auto"
+            >
+              <button
+                id="hero-order-btn"
+                onClick={onExploreMenu}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#E31E24] via-[#cc141a] to-[#a60d12] hover:from-[#FDB913] hover:to-[#e39600] text-white hover:text-neutral-950 font-black text-sm uppercase tracking-wider px-8 py-4 rounded-2xl shadow-lg shadow-[#E31E24]/25 hover:shadow-[#FDB913]/30 transition-all transform hover:-translate-y-1 cursor-pointer group"
+              >
+                <Flame className="w-5 h-5 text-[#FDB913] group-hover:text-neutral-950 transition-colors" />
+                <span>Pesan Menu Online</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              <button
+                id="hero-find-branch-btn"
+                onClick={onFindBranch}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-neutral-800 hover:text-neutral-900 font-bold text-sm uppercase tracking-wider px-7 py-4 rounded-2xl border border-neutral-300 hover:border-neutral-400 transition-all cursor-pointer shadow-sm"
+              >
+                <span>Cari Cawangan Terdekat</span>
+              </button>
+            </motion.div>
+
+            {/* Trust Badges Bar */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 w-full max-w-2xl border-t border-neutral-200 text-left"
+            >
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
+                <ShieldCheck className="w-5 h-5 text-[#D97706] shrink-0" />
+                <div className="text-[11px]">
+                  <p className="font-bold text-neutral-900">100% Halal</p>
+                  <p className="text-neutral-500">Diiktiraf JAKIM</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
+                <Clock className="w-5 h-5 text-[#E31E24] shrink-0" />
+                <div className="text-[11px]">
+                  <p className="font-bold text-neutral-900">24 Jam</p>
+                  <p className="text-neutral-500">Perapan Rempah</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
+                <Sparkles className="w-5 h-5 text-[#D97706] shrink-0" />
+                <div className="text-[11px]">
+                  <p className="font-bold text-neutral-900">Ayam Segar</p>
+                  <p className="text-neutral-500">Bukan Beku</p>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2.5 bg-white p-2.5 rounded-xl border border-neutral-200/80 shadow-sm">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                <div className="text-[11px]">
+                  <p className="font-bold text-neutral-900">Saiz Mega</p>
+                  <p className="text-neutral-500">Potongan Gergasi</p>
+                </div>
+              </div>
+            </motion.div>
 
           </div>
 
-          {/* Category Tabs */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin">
-            {categories.map((cat) => {
-              const isActive = activeCategory === cat.id;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => {
-                    playPopSound();
-                    setActiveCategory(cat.id);
-                  }}
-                  className={`px-5 py-3 rounded-xl font-bold text-xs sm:text-sm uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer flex items-center gap-2 ${
-                    isActive
-                      ? 'bg-gradient-to-r from-[#E31E24] to-[#C1121F] text-white shadow-lg shadow-[#E31E24]/20 border border-[#FDB913]/30 scale-102'
-                      : 'bg-white text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100 border border-neutral-200 shadow-sm'
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                  <span
-                    className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                      isActive ? 'bg-black/30 text-[#FDB913]' : 'bg-neutral-100 text-neutral-600 font-bold border border-neutral-200'
-                    }`}
-                  >
-                    {cat.count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          {/* Right Column: Visual Showpiece & Floating Badges */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 relative flex items-center justify-center"
+          >
+            
+            {/* Ambient Background Circle */}
+            <div className="absolute w-72 h-72 sm:w-96 sm:h-92 rounded-full bg-gradient-to-tr from-[#E31E24]/20 to-[#FDB913]/25 blur-3xl" />
+
+            {/* Glowing Platter Frame */}
+            <div className="relative group w-full max-w-md">
+              {/* Outer Decorative Ring */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-[#E31E24] via-[#FDB913] to-[#E31E24] rounded-3xl blur-md opacity-30 group-hover:opacity-60 transition duration-500 animate-pulse" />
+
+              {/* Main Promo Video (Loop) */}
+              <div className="relative rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-2xl">
+                <video
+                  ref={videoRef}
+                  src={promoVid}
+                  poster={promoPic}    
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-96 sm:h-[30rem] lg:h-[34rem] object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+                
+                {/* Gradient Shadow Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+              </div>
+
+              {/* Floating Badge 1: 5-Star Rating */}
+              <div className="absolute -top-3 left-2 sm:-top-4 sm:-left-6 bg-white/95 backdrop-blur-md border border-neutral-200/90 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 animate-bounce duration-1000 z-30 pointer-events-none">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 flex items-center justify-center text-[#D97706] shrink-0">
+                  <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-[#D97706]" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1">
+                    <span className="font-black text-xs sm:text-sm text-neutral-900">4.9 / 5.0</span>
+                  </div>
+                  <p className="text-[9px] sm:text-[10px] text-neutral-500">12,000+ Review</p>
+                </div>
+              </div>
+
+              {/* Floating Badge 2: Mega Portion */}
+              <div className="absolute -bottom-3 right-2 sm:-bottom-4 sm:-right-6 bg-white/95 backdrop-blur-md border border-neutral-200/90 text-neutral-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-xl flex items-center gap-2.5 sm:gap-3 z-30 pointer-events-none">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#E31E24]/10 flex items-center justify-center text-[#E31E24] shrink-0">
+                  <Flame className="w-4 h-4 sm:w-5 sm:h-5 fill-[#E31E24]" />
+                </div>
+                <div>
+                  <p className="font-black text-[11px] sm:text-xs text-neutral-900 uppercase tracking-wider">Potongan Mega</p>
+                  <p className="text-[9px] sm:text-[10px] text-[#B45309]">Extra Rangup & Berjus</p>
+                </div>
+              </div>
+
+            </div>
+
+          </motion.div>
 
         </div>
-
-        {/* Menu Items Grid */}
-        {filteredItems.length === 0 ? (
-          <div className="text-center py-16 bg-white rounded-3xl border border-neutral-200 shadow-sm">
-            <Flame className="w-12 h-12 text-[#E31E24] mx-auto mb-3 opacity-50" />
-            <h3 className="text-lg font-bold text-neutral-900">Tiada item dijumpai</h3>
-            <p className="text-xs text-neutral-600 mt-1">Cuba tukar carian atau pilih kategori lain.</p>
-            <button
-              onClick={() => {
-                setSearchQuery('');
-                setActiveCategory('all');
-              }}
-              className="mt-4 px-4 py-2 bg-neutral-100 hover:bg-neutral-200 rounded-xl text-xs font-bold text-neutral-800 border border-neutral-300/80 cursor-pointer"
-            >
-              Reset Pilihan
-            </button>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => {
-              const activePortion = cardPortions[item.id] || (item.portions && item.portions.length > 0 ? item.portions[0] : undefined);
-              const displayPrice = activePortion ? activePortion.price : item.price;
-
-              return (
-                <div
-                  key={item.id}
-                  className="group bg-white hover:bg-neutral-50/50 rounded-3xl border border-neutral-200/80 hover:border-[#D97706]/40 transition-all duration-300 overflow-hidden flex flex-col shadow-sm hover:shadow-xl"
-                >
-                  {/* Image & Badges */}
-                  <div className="relative h-56 w-full overflow-hidden bg-neutral-900">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-
-                    {/* Top Badges */}
-                    <div className="absolute top-3.5 left-3.5 flex flex-wrap gap-1.5">
-                      {item.isBestSeller && (
-                        <span className="bg-[#E31E24] text-white text-[10px] font-black uppercase px-2.5 py-1 rounded-md shadow-md flex items-center gap-1">
-                          <Flame className="w-3 h-3 fill-white" /> Best Seller
-                        </span>
-                      )}
-                      {item.isChefSpecial && (
-                        <span className="bg-[#FDB913] text-black text-[10px] font-black uppercase px-2.5 py-1 rounded-md shadow-md flex items-center gap-1">
-                          <Star className="w-3 h-3 fill-black" /> Pilihan Chef
-                        </span>
-                      )}
-                      {item.isNew && (
-                        <span className="bg-amber-500 text-black text-[10px] font-black uppercase px-2.5 py-1 rounded-md shadow-md">
-                          Baharu
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Original Recipe / Flavor Tag */}
-                    <div className="absolute top-3.5 right-3.5 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-black text-[#FDB913] border border-[#FDB913]/30 flex items-center gap-1">
-                      <span>✓ Original Crispy</span>
-                    </div>
-
-                    {/* Portions / Slogan footer inside photo */}
-                    <div className="absolute bottom-3 left-3.5 right-3.5 text-[11px] text-neutral-300 font-medium flex items-center justify-between">
-                      <span className="bg-black/70 px-2 py-0.5 rounded text-[#FDB913] font-bold text-[10px]">
-                        {item.sauceInfo ? `✓ ${item.sauceInfo}` : 'Rangup di luar, juicy di dalam'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                    <div className="space-y-1.5">
-                      <h3 className="font-black text-lg text-neutral-900 group-hover:text-[#D97706] transition-colors leading-snug">
-                        {item.name}
-                      </h3>
-                      <p className="text-xs font-bold text-[#B45309]">
-                        {item.tagline}
-                      </p>
-                      <p className="text-xs text-neutral-600 line-clamp-2 leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
-
-                    {/* Portion Tier Selector */}
-                    {item.portions && item.portions.length > 0 && (
-                      <div className="space-y-1.5 pt-1">
-                        <span className="text-[10px] text-neutral-500 uppercase font-bold flex items-center gap-1">
-                          <Layers className="w-3 h-3 text-[#D97706]" /> Pilih Saiz / Kuantiti:
-                        </span>
-                        <div className="grid grid-cols-3 gap-1.5">
-                          {item.portions.map((portion) => {
-                            const isSelected = activePortion?.label === portion.label;
-                            return (
-                              <button
-                                key={portion.label}
-                                type="button"
-                                onClick={() => handlePortionSelect(item.id, portion)}
-                                className={`py-1.5 px-2 rounded-xl text-center border transition-all cursor-pointer ${
-                                  isSelected
-                                    ? 'bg-[#E31E24] border-[#E31E24] text-white shadow-md font-black'
-                                    : 'bg-neutral-100 border-neutral-200 text-neutral-700 hover:text-neutral-900 hover:border-neutral-300 font-medium'
-                                }`}
-                              >
-                                <span className="text-[11px] block">{portion.label}</span>
-                                <span className={`text-[10px] font-bold block ${isSelected ? 'text-[#FDB913]' : 'text-[#B45309]'}`}>
-                                  RM {portion.price.toFixed(2)}
-                                </span>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Price & Action Buttons */}
-                    <div className="pt-3 border-t border-neutral-200/80 flex items-center justify-between gap-2">
-                      <div>
-                        <span className="text-[10px] text-neutral-500 block uppercase font-bold">
-                          {activePortion ? activePortion.label : 'Harga'}
-                        </span>
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-xl font-black text-[#D97706]">
-                            RM {displayPrice.toFixed(2)}
-                          </span>
-                          {item.originalPrice && !activePortion && (
-                            <span className="text-xs text-neutral-400 line-through">
-                              RM {item.originalPrice.toFixed(2)}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        {/* Customize Button */}
-                        <button
-                          onClick={() => onSelectItem(item, activePortion)}
-                          className="px-3 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-neutral-800 border border-neutral-300/80 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
-                          title="Pilih kepedasan & sos"
-                        >
-                          <Eye className="w-3.5 h-3.5 text-neutral-700" />
-                          <span>Kustom</span>
-                        </button>
-
-                        {/* Quick Add Button */}
-                        <button
-                          onClick={() => {
-                            playPopSound();
-                            onQuickAdd(item, activePortion);
-                          }}
-                          className="p-2.5 sm:px-3.5 sm:py-2.5 rounded-xl bg-[#E31E24] hover:bg-[#FDB913] text-white hover:text-black font-black text-xs uppercase tracking-wider flex items-center gap-1.5 transition-all shadow-md shadow-[#E31E24]/20 cursor-pointer"
-                          title="Tambah Cepat ke Troli"
-                        >
-                          <Plus className="w-4 h-4" />
-                          <span className="hidden sm:inline">Pesan</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
-
       </div>
     </section>
   );
